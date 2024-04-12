@@ -1,0 +1,30 @@
+version: "3.7"
+
+
+services:
+  protobuf:
+    platform: linux/x86_64
+    container_name: protobuf
+    image: protobuf
+    build:
+      context: ../
+      dockerfile: ./build/docker/protobuf/Dockerfile
+      args:
+        - GO_VERSION=${GO_VERSION}
+    working_dir: /usr/src/campus-server
+    volumes:
+      - ../:/usr/src/campus-server
+
+  protoc:
+    platform: linux/x86_64
+    container_name: protoc
+    image: protoc
+    build:
+      context: ../
+      dockerfile: ./build/docker/protoc/Dockerfile
+      args:
+        - GO_VERSION=${GO_VERSION}
+    working_dir: /usr/src/campus-server
+    volumes:
+      - ../:/usr/src/campus-server
+

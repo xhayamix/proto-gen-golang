@@ -1,0 +1,45 @@
+syntax = "proto3";
+
+package definition.options.enums;
+option go_package = "github.com/xhayamix/proto-gen-golang/pkg/domain/proto/definition/options/enums";
+
+import "google/protobuf/descriptor.proto";
+
+message DefineOption {
+  enum AccessorType {
+    Unknown = 0;
+    OnlyServer = 1;
+    ServerAndClient = 2;
+  }
+  AccessorType accessorType = 1;
+
+  message Element {
+    string name = 1;
+    int32 value = 2;
+    string comment = 3;
+    enum SettingAccessorType {
+      SettingAccessorType_Unknown = 0;
+      All = 1;
+      OnlyServer = 2;
+      OnlyClient = 3;
+    }
+    SettingAccessorType settingAccessorType = 4;
+    enum SettingType {
+      SettingType_Unknown = 0;
+      Bool = 1;
+      Int32 = 2;
+      Int64 = 3;
+      String = 4;
+      Int32List = 5;
+      Int64List = 6;
+      StringList = 7;
+    }
+    SettingType settingType = 5;
+    bool serverConstant = 6;
+  }
+  repeated Element elements = 3;
+}
+
+extend google.protobuf.MessageOptions {
+  DefineOption define = 53001;
+}

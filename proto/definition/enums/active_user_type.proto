@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package definition.enums;
+option go_package = "github.com/xhayamix/proto-gen-golang/pkg/domain/proto/definition/enums";
+
+import "definition/options/enums.proto";
+
+message ActiveUserType {
+  option (definition.options.enums.define) = {
+    accessorType: OnlyServer,
+    elements: [
+      { name: "provisional", value: 1, comment: "仮登録" },
+      { name: "Active", value: 2, comment: "アクティブユーザー" },
+      { name: "Deleted", value: 99, comment: "アカウント削除済み" }
+    ]
+  };
+}

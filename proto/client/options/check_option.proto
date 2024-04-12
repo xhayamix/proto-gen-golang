@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package client.options.check_option;
+option go_package = "github.com/xhayamix/proto-gen-golang/pkg/domain/proto/client/options";
+option csharp_namespace = "Campus.Common.Proto.Client.Api.Options";
+
+import "google/protobuf/descriptor.proto";
+import "client/enums/enums_gen.proto";
+
+message CheckOption {
+  bool disableGameAuthToken = 1;
+  bool disableMasterVersion = 2;
+  bool enableResponseCache = 3;
+  bool enableRequestSignature = 4;
+}
+
+message ErrorOption {
+  repeated enums.ErrorCode errorCodes = 1;
+}
+
+extend google.protobuf.MethodOptions {
+  CheckOption checkOption = 50006;
+  ErrorOption errorOption = 50007;
+}

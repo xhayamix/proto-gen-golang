@@ -1,0 +1,57 @@
+syntax = "proto3";
+
+package server.options.api;
+option go_package = "github.com/xhayamix/proto-gen-golang/pkg/domain/proto/server/options/api";
+
+import "google/protobuf/descriptor.proto";
+
+message ServiceOption {
+  repeated string featureMaintenanceTypes = 1;
+}
+
+message MethodOption {
+  bool disableCommonResponse = 1;
+  bool disableResponseCache = 2;
+  bool disableCheckMaintenance = 3;
+  bool disableCheckAppVersion = 4;
+  bool disableCheckLoginToday = 5;
+  bool disableFeatureMaintenance = 6;
+  repeated string featureMaintenanceTypes = 7;
+}
+
+// clientでも使用しているoption serverのみで使用するoptionは
+// MethodOptionに追加すること
+message CheckOption {
+  bool disableGameAuthToken = 1;
+  bool disableMasterVersion = 2;
+  bool enableResponseCache = 3;
+  bool enableRequestSignature = 4;
+}
+
+// clientでも使用しているoption
+message ErrorOption {
+  repeated string errorCodes = 1;
+}
+
+message FieldOption {
+  message MasterRef {
+    string table = 1;
+    string column = 2;
+    repeated string parentFields = 3;
+  }
+  MasterRef masterRef = 1;
+}
+
+extend google.protobuf.ServiceOptions {
+  ServiceOption serviceOption = 53000;
+}
+
+extend google.protobuf.MethodOptions {
+  MethodOption methodOption = 53001;
+  CheckOption checkOption = 53002;
+  ErrorOption errorOption = 53003;
+}
+
+extend google.protobuf.FieldOptions {
+  FieldOption fieldOption = 53004;
+}
