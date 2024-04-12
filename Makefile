@@ -13,7 +13,7 @@ define docker-compose
 		$1
 endef
 
-## protobuf (usage: `make protobuf arg='protoc --proto_path=./proto --go_out=module=github.com/xhayamix/proto-gen-golang:. ./proto/server/options/api/api.proto'`)
+## protobuf (usage: `make protobuf arg='protoc --proto_path=./proto --go_out=module=github.com/xhayamix/proto-gen-golang:. ./gen-proto/server/options/api/api.proto'`)
 .PHONY: protobuf
 protobuf:
 	$(call docker-compose, run --rm protobuf $(arg))
@@ -22,10 +22,6 @@ protobuf:
 .PHONY: protoc
 protoc:
 	$(call docker-compose, run --rm --entrypoint sh protoc ./scripts/protoc.sh)
-	goimports -w -local "github.com/QualiArts/campus-server" pkg/domain/proto/client pkg/domain/proto/server pkg/cmd/admin/handler pkg/domain/proto/definition
-	gofmt -s -w pkg/domain/proto/client pkg/cmd/admin/handler pkg/domain/proto/definition
-	$(call clang-format, --entrypoint sh, -c "find ./campus-proto -type f -name '*.proto' | xargs clang-format -i")
-	npm run format --prefix web
 
 ## local install
 .PHONY: local-install
