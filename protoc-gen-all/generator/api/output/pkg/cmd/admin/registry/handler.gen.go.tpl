@@ -3,10 +3,10 @@ package registry
 
 import (
 {{- range . }}
-	"github.com/QualiArts/campus-server/pkg/cmd/admin/handler/{{ .PackageName }}"
+	"github.com/xhayamix/proto-gen-golang/pkg/cmd/admin/handler/{{ .PackageName }}"
 {{- end }}
-	"github.com/QualiArts/campus-server/pkg/cmd/admin/router"
-	"github.com/QualiArts/campus-server/pkg/domain/entity/config"
+	"github.com/xhayamix/proto-gen-golang/pkg/cmd/admin/router"
+	"github.com/xhayamix/proto-gen-golang/pkg/domain/entity/config"
 )
 
 var handlerSet = []interface{}{

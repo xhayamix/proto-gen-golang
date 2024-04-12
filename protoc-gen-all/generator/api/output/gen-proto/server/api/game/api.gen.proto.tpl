@@ -2,8 +2,8 @@
 syntax = "proto3";
 
 package client.api{{ if .IsCommon }}.common{{ end }};
-option go_package = "github.com/QualiArts/campus-server/pkg/domain/proto/client/api{{ if .IsCommon }}/common{{ end }}";
-option csharp_namespace = "Campus.Common.Proto.Client.Api{{ if .IsCommon }}.Common{{ end }}";
+option go_package = "github.com/xhayamix/proto-gen-golang/pkg/domain/proto/client/api{{ if .IsCommon }}/common{{ end }}";
+option csharp_namespace = "Gen.Common.Proto.Client.Api{{ if .IsCommon }}.Common{{ end }}";
 
 {{ range .ImportPaths -}}
 import "{{ . }}";

@@ -5,9 +5,9 @@ import (
 	"context"
 	"encoding/json"
 
-	"github.com/QualiArts/campus-server/pkg/cerrors"
-	"github.com/QualiArts/campus-server/pkg/domain/port/gameapi"
-	"github.com/QualiArts/campus-server/pkg/domain/proto/client/api"
+	"github.com/xhayamix/proto-gen-golang/pkg/cerrors"
+	"github.com/xhayamix/proto-gen-golang/pkg/domain/port/gameapi"
+	"github.com/xhayamix/proto-gen-golang/pkg/domain/proto/client/api"
 )
 
 func (i *interactor) list(ctx context.Context) ([]gameapi.Method) {

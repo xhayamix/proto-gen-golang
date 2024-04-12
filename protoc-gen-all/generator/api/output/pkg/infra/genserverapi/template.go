@@ -1,4 +1,4 @@
-package campusserverapi
+package genserverapi
 
 import (
 	"bytes"
@@ -56,7 +56,7 @@ func (c *Creator) Create(files []*input.File) ([]*output.TemplateInfo, error) {
 		}
 		results = append(results, &output.TemplateInfo{
 			Data:     buf.Bytes(),
-			FilePath: core.JoinPath("pkg/infra/campusserverapi", service.SnakeName+".gen.go"),
+			FilePath: core.JoinPath("pkg/infra/genserverapi", service.SnakeName+".gen.go"),
 		})
 	}
 	if len(results) == 0 {

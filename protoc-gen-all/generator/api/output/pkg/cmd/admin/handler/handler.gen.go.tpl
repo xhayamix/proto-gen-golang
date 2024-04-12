@@ -8,9 +8,9 @@ import (
 {{- range .ImportPaths }}
 	{{ . }}
 {{- end }}
-	"github.com/QualiArts/campus-server/pkg/cerrors"
-	"github.com/QualiArts/campus-server/pkg/cmd/admin/router"
-	"github.com/QualiArts/campus-server/pkg/domain/entity/config"
+	"github.com/xhayamix/proto-gen-golang/pkg/cerrors"
+	"github.com/xhayamix/proto-gen-golang/pkg/cmd/admin/router"
+	"github.com/xhayamix/proto-gen-golang/pkg/domain/entity/config"
 )
 
 type {{ .PascalName }}Handler interface {

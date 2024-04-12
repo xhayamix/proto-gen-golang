@@ -2,7 +2,7 @@
 package maintenance
 
 import (
-	"github.com/QualiArts/campus-server/pkg/domain/enum"
+	"github.com/xhayamix/proto-gen-golang/pkg/domain/enum"
 )
 
 func getFeatureMaintenanceTypes(method string) enum.FeatureMaintenanceTypeSlice {

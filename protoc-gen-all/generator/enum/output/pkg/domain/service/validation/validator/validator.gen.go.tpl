@@ -9,12 +9,12 @@ import (
 	ut "github.com/go-playground/universal-translator"
 	"github.com/go-playground/validator/v10"
 
-	"github.com/QualiArts/campus-server/pkg/cerrors"
-	"github.com/QualiArts/campus-server/pkg/domain/component/masterdata"
-	"github.com/QualiArts/campus-server/pkg/domain/entity/master"
-	"github.com/QualiArts/campus-server/pkg/domain/enum"
-	"github.com/QualiArts/campus-server/pkg/logging/app"
-	"github.com/QualiArts/campus-server/pkg/util/strings"
+	"github.com/xhayamix/proto-gen-golang/pkg/cerrors"
+	"github.com/xhayamix/proto-gen-golang/pkg/domain/component/masterdata"
+	"github.com/xhayamix/proto-gen-golang/pkg/domain/entity/master"
+	"github.com/xhayamix/proto-gen-golang/pkg/domain/enum"
+	"github.com/xhayamix/proto-gen-golang/pkg/logging/app"
+	"github.com/xhayamix/proto-gen-golang/pkg/util/strings"
 )
 
 type {{ .CamelName }}Validator struct{}

@@ -7,7 +7,7 @@ import (
 	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
 	"google.golang.org/grpc"
 
-	pb "github.com/QualiArts/campus-server/pkg/domain/proto/client/api"
+	pb "github.com/xhayamix/proto-gen-golang/pkg/domain/proto/client/api"
 )
 
 func registerHandler(ctx context.Context, mux *runtime.ServeMux, target string, opts []grpc.DialOption) error {

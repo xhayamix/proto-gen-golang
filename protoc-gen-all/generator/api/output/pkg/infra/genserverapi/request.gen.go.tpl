@@ -1,13 +1,13 @@
 {{ template "autogen_comment" }}
-package campusserverapi
+package genserverapi
 
 import (
 	"context"
 
     "google.golang.org/protobuf/types/known/emptypb"
 
-	"github.com/QualiArts/campus-server/pkg/cerrors"
-	"github.com/QualiArts/campus-server/pkg/domain/proto/client/api"
+	"github.com/xhayamix/proto-gen-golang/pkg/cerrors"
+	"github.com/xhayamix/proto-gen-golang/pkg/domain/proto/client/api"
 )
 
 {{- $service := . }}

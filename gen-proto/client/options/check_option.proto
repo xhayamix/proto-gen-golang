@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package client.options.check_option;
 option go_package = "github.com/xhayamix/proto-gen-golang/pkg/domain/proto/client/options";
-option csharp_namespace = "Campus.Common.Proto.Client.Api.Options";
+option csharp_namespace = "Gen.Common.Proto.Client.Api.Options";
 
 import "google/protobuf/descriptor.proto";
 import "client/enums/enums_gen.proto";

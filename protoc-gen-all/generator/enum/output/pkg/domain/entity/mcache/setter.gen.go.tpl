@@ -4,9 +4,9 @@ package mcache
 import (
 	"strconv"
 
-	"github.com/QualiArts/campus-server/pkg/cerrors"
-	"github.com/QualiArts/campus-server/pkg/domain/enum"
-	"github.com/QualiArts/campus-server/pkg/util/strings"
+	"github.com/xhayamix/proto-gen-golang/pkg/cerrors"
+	"github.com/xhayamix/proto-gen-golang/pkg/domain/enum"
+	"github.com/xhayamix/proto-gen-golang/pkg/util/strings"
 )
 
 func (s *{{ .PascalName }}) Set(typ enum.{{ .PascalName }}Type, value string) error {

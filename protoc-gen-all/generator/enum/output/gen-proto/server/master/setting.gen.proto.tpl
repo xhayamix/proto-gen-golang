@@ -2,7 +2,7 @@
 syntax = "proto3";
 
 package server.master;
-option go_package = "github.com/QualiArts/campus-server/pkg/domain/entity/master";
+option go_package = "github.com/xhayamix/proto-gen-golang/pkg/domain/entity/master";
 
 import "server/enums/enums_gen.proto";
 import "server/options/master/master.proto";

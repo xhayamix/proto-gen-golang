@@ -9,7 +9,7 @@ define docker-compose
 	docker-compose \
 		-f ${MAKEFILE_DIR}development/docker-compose.yml \
 		--env-file ${MAKEFILE_DIR}.env \
-		-p campus-server \
+		-p proto-gen-golang \
 		$1
 endef
 

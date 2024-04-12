@@ -1,13 +1,13 @@
 {{ template "autogen_comment" }}
 
 //go:generate mockgen -source=$GOFILE -destination=mock_$GOPACKAGE/mock_api.go
-//go:generate goimports -w --local "github.com/QualiArts/campus-server" mock_$GOPACKAGE/mock_api.go
+//go:generate goimports -w --local "github.com/xhayamix/proto-gen-golang" mock_$GOPACKAGE/mock_api.go
 package gameapi
 
 import (
 	"context"
 
-	"github.com/QualiArts/campus-server/pkg/domain/proto/client/api"
+	"github.com/xhayamix/proto-gen-golang/pkg/domain/proto/client/api"
 )
 
 type Method string

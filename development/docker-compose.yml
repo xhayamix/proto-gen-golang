@@ -11,9 +11,9 @@ services:
       dockerfile: ./build/docker/protobuf/Dockerfile
       args:
         - GO_VERSION=${GO_VERSION}
-    working_dir: /usr/src/campus-server
+    working_dir: /usr/src/proto-gen-golang
     volumes:
-      - ../:/usr/src/campus-server
+      - ../:/usr/src/proto-gen-golang
 
   protoc:
     platform: linux/x86_64
@@ -24,7 +24,7 @@ services:
       dockerfile: ./build/docker/protoc/Dockerfile
       args:
         - GO_VERSION=${GO_VERSION}
-    working_dir: /usr/src/campus-server
+    working_dir: /usr/src/proto-gen-golang
     volumes:
-      - ../:/usr/src/campus-server
+      - ../:/usr/src/proto-gen-golang
 

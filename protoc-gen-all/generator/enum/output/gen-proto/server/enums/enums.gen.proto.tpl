@@ -3,7 +3,7 @@ syntax = "proto3";
 
 package server.enums;
 
-option go_package = "github.com/QualiArts/campus-server/pkg/domain/proto/server/enums";
+option go_package = "github.com/xhayamix/proto-gen-golang/pkg/domain/proto/server/enums";
 {{ range . }}
 {{ $Name := .PascalName -}}
 enum {{ .PascalName }} {

@@ -2,7 +2,7 @@
 package api
 
 import (
-	"github.com/QualiArts/campus-server/pkg/domain/proto/client/api/common"
+	"github.com/xhayamix/proto-gen-golang/pkg/domain/proto/client/api/common"
 )
 
 {{ range . }}

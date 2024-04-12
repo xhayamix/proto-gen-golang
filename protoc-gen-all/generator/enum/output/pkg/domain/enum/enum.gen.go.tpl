@@ -10,7 +10,7 @@ import (
 
 	"github.com/scylladb/go-set/i32set"
 
-	cstrings "github.com/QualiArts/campus-server/pkg/util/strings"
+	cstrings "github.com/xhayamix/proto-gen-golang/pkg/util/strings"
 )
 
 const {{ .PascalName }}Name = "{{ .PascalName }}"

@@ -3,8 +3,8 @@ syntax = "proto3";
 
 package client.enums;
 
-option go_package = "github.com/QualiArts/campus-server/pkg/domain/proto/client/enums";
-option csharp_namespace = "Campus.Common.Proto.Client.Enums";
+option go_package = "github.com/xhayamix/proto-gen-golang/pkg/domain/proto/client/enums";
+option csharp_namespace = "Gen.Common.Proto.Client.Enums";
 {{ range . }}
 {{ $Name := .PascalName -}}
 enum {{ .PascalName }} {

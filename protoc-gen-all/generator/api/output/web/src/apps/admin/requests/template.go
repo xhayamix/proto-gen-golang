@@ -163,7 +163,7 @@ func (c *creator) convertMessage(msg *input.Message, tMap typeMap, prefix string
 				transactionSet.Add(field.Type)
 			} else if tMap.Has(field.Type) {
 				typ = tMap.Get(field.Type)
-			} else if strings.Contains(field.ParentGoPackage, ".") && !strings.HasPrefix(field.ParentGoPackage, "github.com/QualiArts/campus-server/pkg/cmd/admin/handler") {
+			} else if strings.Contains(field.ParentGoPackage, ".") && !strings.HasPrefix(field.ParentGoPackage, "github.com/xhayamix/proto-gen-golang/pkg/cmd/admin/handler") {
 				typ = "unknown"
 				comment += " " + field.ParentGoPackage + "." + field.Type
 			}

@@ -22,7 +22,7 @@ import (
 	loadtestregistry "github.com/xhayamix/proto-gen-golang/protoc-gen-all/generator/api/output/pkg/cmd/loadtest/registry"
 	portgameapi "github.com/xhayamix/proto-gen-golang/protoc-gen-all/generator/api/output/pkg/domain/port/gameapi"
 	"github.com/xhayamix/proto-gen-golang/protoc-gen-all/generator/api/output/pkg/domain/proto/client/api"
-	"github.com/xhayamix/proto-gen-golang/protoc-gen-all/generator/api/output/pkg/infra/campusserverapi"
+	"github.com/xhayamix/proto-gen-golang/protoc-gen-all/generator/api/output/pkg/infra/genserverapi"
 	"github.com/xhayamix/proto-gen-golang/protoc-gen-all/generator/api/output/web/src/apps/admin/requests"
 	"github.com/xhayamix/proto-gen-golang/protoc-gen-all/perrors"
 )
@@ -65,7 +65,7 @@ var allAdminCreators = []output.TemplateCreator{
 
 var allGameTemplatesCreators = []output.TemplatesCreator{
 	&check.Creator{},
-	&campusserverapi.Creator{},
+	&genserverapi.Creator{},
 }
 
 func (g *generator) Build() ([]core.GenFile, error) {

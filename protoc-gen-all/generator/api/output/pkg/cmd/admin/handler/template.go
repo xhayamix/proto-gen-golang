@@ -84,7 +84,7 @@ func (c *creator) Create(file *input.File) (*output.TemplateInfo, error) {
 					typ := f.Type
 					if f.IsEnum {
 						typ = "enums." + typ
-						importPathSet.Add(`enums "github.com/QualiArts/campus-server/pkg/domain/proto/server/enums"`)
+						importPathSet.Add(`enums "github.com/xhayamix/proto-gen-golang/pkg/domain/proto/server/enums"`)
 					}
 					if f.IsList {
 						typ = "[]" + typ

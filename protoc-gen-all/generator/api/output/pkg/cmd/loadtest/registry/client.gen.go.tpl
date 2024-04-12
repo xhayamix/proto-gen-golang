@@ -2,7 +2,7 @@
 package registry
 
 import (
-	"github.com/QualiArts/campus-server/pkg/domain/proto/client/api"
+	"github.com/xhayamix/proto-gen-golang/pkg/domain/proto/client/api"
 )
 
 var clientSet = []interface{}{

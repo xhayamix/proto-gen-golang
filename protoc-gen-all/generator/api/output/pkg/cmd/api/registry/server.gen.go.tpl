@@ -4,7 +4,7 @@ package registry
 import (
 	"google.golang.org/grpc"
 
-	pb "github.com/QualiArts/campus-server/pkg/domain/proto/client/api"
+	pb "github.com/xhayamix/proto-gen-golang/pkg/domain/proto/client/api"
 )
 
 func registerServer(s *grpc.Server) func(

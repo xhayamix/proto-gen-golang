@@ -72,7 +72,7 @@ func main() {
 	})
 
 	endTime := time.Now()
-	logger.Infof("protoc-gen-campus end, elapsed: %s\n", endTime.Sub(startTime).String())
+	logger.Infof("protoc-gen-all end, elapsed: %s\n", endTime.Sub(startTime).String())
 }
 
 func createGeneratorMap(plugin *protogen.Plugin) (map[flagKind]core.Generator, bool) {

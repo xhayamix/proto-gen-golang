@@ -2,8 +2,8 @@
 syntax = "proto3";
 
 package client.master;
-option go_package = "github.com/QualiArts/campus-server/pkg/domain/proto/client/master";
-option csharp_namespace = "Campus.Common.Proto.Client.Master";
+option go_package = "github.com/xhayamix/proto-gen-golang/pkg/domain/proto/client/master";
+option csharp_namespace = "Gen.Common.Proto.Client.Master";
 
 import "client/master/common/options.proto";
 

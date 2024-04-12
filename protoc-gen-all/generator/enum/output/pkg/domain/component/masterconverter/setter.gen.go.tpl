@@ -4,10 +4,10 @@ package masterconverter
 import (
 	"strconv"
 
-	"github.com/QualiArts/campus-server/pkg/cerrors"
-	"github.com/QualiArts/campus-server/pkg/domain/enum"
-	"github.com/QualiArts/campus-server/pkg/domain/proto/client/master"
-	"github.com/QualiArts/campus-server/pkg/util/strings"
+	"github.com/xhayamix/proto-gen-golang/pkg/cerrors"
+	"github.com/xhayamix/proto-gen-golang/pkg/domain/enum"
+	"github.com/xhayamix/proto-gen-golang/pkg/domain/proto/client/master"
+	"github.com/xhayamix/proto-gen-golang/pkg/util/strings"
 )
 
 func set{{ .PascalName }}(msg *master.{{ .PascalName }}, typ enum.{{ .PascalName }}Type, value string) error {
