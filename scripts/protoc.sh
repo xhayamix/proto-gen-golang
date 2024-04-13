@@ -28,3 +28,11 @@ call_protoc \
   --proto_path=${proto_file_dir} \
 	--all_out=gen_enum,paths=source_relative:. \
   ${def_enum_proto_files}
+
+# 3. 2の生成物をもとにEnum関連のファイルを生成
+server_enums_proto_files=$(find ${server_proto_dir}/enums -type f -name '*.proto')
+client_enums_proto_files=$(find ${client_proto_dir}/enums -type f -name '*.proto')
+call_protoc \
+  --proto_path=${proto_file_dir} \
+	--go_out=paths=source_relative:${out_proto_dir} \
+  ${server_enums_proto_files} ${client_enums_proto_files}
