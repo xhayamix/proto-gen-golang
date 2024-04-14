@@ -27,7 +27,7 @@ func ConvertFileFromProto(protoFile *protogen.File) (*File, error) {
 	file := &File{
 		IsCommon:    string(protoFile.Desc.Name()) == "common",
 		SnakeName:   core.ToSnakeCase(paths[len(paths)-1]),
-		PackageName: "client.api", // string(protoFile.Desc.Package().Name()), client,serverでpackage名があってないので本来のやり方だとgameになってしまう
+		PackageName: "client.api", // string(protoFile.Desc.Package().Name()), client,serverでpackage名があってない
 		Service:     nil,
 		Messages:    make([]*Message, 0, len(protoFile.Messages)),
 	}
@@ -124,7 +124,7 @@ func ConvertFileFromProto(protoFile *protogen.File) (*File, error) {
 			DisableCheckLoginToday:    methodOption.GetDisableCheckLoginToday(),
 			DisableFeatureMaintenance: methodOption.GetDisableFeatureMaintenance(),
 			FeatureMaintenanceTypes:   methodOption.GetFeatureMaintenanceTypes(),
-			DisableGameAuthToken:      checkOption.GetDisableGameAuthToken(),
+			DisableAuthToken:          checkOption.GetDisableAuthToken(),
 			DisableMasterVersion:      checkOption.GetDisableMasterVersion(),
 			EnableRequestSignature:    checkOption.GetEnableRequestSignature(),
 			CheckOption:               checkOption.String(),
@@ -225,7 +225,7 @@ func createMessage(protoMessage *protogen.Message) (*Message, error) {
 		case protoreflect.MessageKind:
 			pkgName := string(field.Desc.Message().ParentFile().Package())
 			switch {
-			case strings.HasSuffix(pkgName, "game.common"):
+			case strings.HasSuffix(pkgName, "api.common"):
 				pkgType = PkgType_APICommon
 			case strings.HasSuffix(pkgName, "client.common"):
 				pkgType = PkgType_ClientCommon

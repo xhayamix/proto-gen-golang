@@ -2,3 +2,4 @@
 // This file is meant to be re-generated in place and/or deleted at any time.
 
 export * from "./ActiveUserType.gen";
+export * from "./ErrorCode.gen";

@@ -22,7 +22,7 @@ message MethodOption {
 // clientでも使用しているoption serverのみで使用するoptionは
 // MethodOptionに追加すること
 message CheckOption {
-  bool disableGameAuthToken = 1;
+  bool disableAuthToken = 1;
   bool disableMasterVersion = 2;
   bool enableResponseCache = 3;
   bool enableRequestSignature = 4;

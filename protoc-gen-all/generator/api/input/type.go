@@ -71,7 +71,7 @@ type Method struct {
 	DisableCheckLoginToday    bool
 	DisableFeatureMaintenance bool
 	FeatureMaintenanceTypes   []string
-	DisableGameAuthToken      bool
+	DisableAuthToken          bool
 	DisableMasterVersion      bool
 	EnableRequestSignature    bool
 	CheckOption               string

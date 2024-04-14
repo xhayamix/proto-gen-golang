@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/xhayamix/proto-gen-golang/protoc-gen-all/generator/mysql"
 	"strings"
 	"time"
 
@@ -16,13 +17,10 @@ import (
 type flagKind string
 
 const (
-	flagKindGenMaster       flagKind = "gen_master"
-	flagKindGenTransaction  flagKind = "gen_transaction"
 	flagKindGenZap          flagKind = "gen_zap"
 	flagKindGenEnum         flagKind = "gen_enum"
 	flagKindGenApi          flagKind = "gen_api"
-	flagKindGenAdmin        flagKind = "gen_admin"
-	flagKindGenShare        flagKind = "gen_share"
+	flagKindGenMysql        flagKind = "gen_mysql"
 	flagKindGenCommon       flagKind = "gen_common"
 	flagKindGenLog          flagKind = "gen_log"
 	flagKindGenLogActionGen flagKind = "gen_log_action_gen"
@@ -87,6 +85,8 @@ func createGeneratorMap(plugin *protogen.Plugin) (map[flagKind]core.Generator, b
 			generatorMap[flagKindGenApi] = api.NewGenerator(plugin)
 		case flagKindGenEnum:
 			generatorMap[flagKindGenEnum] = enum.NewGenerator(plugin)
+		case flagKindGenMysql:
+			generatorMap[flagKindGenMysql] = mysql.NewGenerator(plugin)
 			/*
 				case flagKindWritePb:
 					generatorMap[flagKindWritePb] = core.NewEmptyGenerator()

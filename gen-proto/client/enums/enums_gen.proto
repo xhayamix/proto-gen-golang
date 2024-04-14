@@ -7,3 +7,29 @@ package client.enums;
 
 option go_package = "github.com/xhayamix/proto-gen-golang/pkg/domain/proto/client/enums";
 option csharp_namespace = "Gen.Common.Proto.Client.Enums";
+
+enum ErrorCode {
+  ErrorCode_Unknown = 0;
+  // パラメータの不正
+  ErrorCode_InvalidArgument = 1001;
+  // サーバー内部エラー
+  ErrorCode_Internal = 1002;
+  // 認証エラー
+  ErrorCode_Unauthenticated = 1003;
+  // アクセス権限なし
+  ErrorCode_PermissionDenied = 1004;
+  // リソースが見つからなかった
+  ErrorCode_NotFound = 1005;
+  // ユーザーが見つからなかった
+  ErrorCode_UserNotFound = 2001;
+  // ユーザーは削除済み
+  ErrorCode_UserDeleted = 2002;
+  // メンテナンス中
+  ErrorCode_InMaintenance = 2003;
+  // アカウント停止中
+  ErrorCode_AccountBan = 2004;
+  // NGワードが含まれている
+  ErrorCode_NgWordContains = 2005;
+  // 無効な日付
+  ErrorCode_ShopInvalidDay = 2006;
+}

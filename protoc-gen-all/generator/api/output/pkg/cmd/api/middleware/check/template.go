@@ -39,7 +39,7 @@ func (c *Creator) Create(files []*input.File) ([]*output.TemplateInfo, error) {
 	disableCheckMaintenanceMethods := make([]string, 0)
 	disableCheckAppVersionMethods := make([]string, 0)
 	disableCheckLoginTodayMethods := make([]string, 0)
-	disableCheckGameAuthTokenMethods := make([]string, 0)
+	disableCheckAuthTokenMethods := make([]string, 0)
 	disableCheckMasterVersionMethods := make([]string, 0)
 	enableCheckRequestSignature := make([]string, 0)
 	enableFeatureMaintenanceMapByMethod := make(map[string][]string)
@@ -60,8 +60,8 @@ func (c *Creator) Create(files []*input.File) ([]*output.TemplateInfo, error) {
 			if method.DisableCheckLoginToday {
 				disableCheckLoginTodayMethods = append(disableCheckLoginTodayMethods, methodName)
 			}
-			if method.DisableGameAuthToken {
-				disableCheckGameAuthTokenMethods = append(disableCheckGameAuthTokenMethods, methodName)
+			if method.DisableAuthToken {
+				disableCheckAuthTokenMethods = append(disableCheckAuthTokenMethods, methodName)
 			}
 			if method.DisableMasterVersion {
 				disableCheckMasterVersionMethods = append(disableCheckMasterVersionMethods, methodName)
@@ -112,7 +112,7 @@ func (c *Creator) Create(files []*input.File) ([]*output.TemplateInfo, error) {
 	}
 	infos = append(infos, info)
 
-	info, err = c.template(tpl, "Auth", "disable", disableCheckGameAuthTokenMethods)
+	info, err = c.template(tpl, "Auth", "disable", disableCheckAuthTokenMethods)
 	if err != nil {
 		return nil, perrors.Stack(err)
 	}

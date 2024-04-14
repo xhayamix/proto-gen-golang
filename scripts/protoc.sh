@@ -36,3 +36,14 @@ call_protoc \
   --proto_path=${proto_file_dir} \
 	--go_out=paths=source_relative:${out_proto_dir} \
   ${server_enums_proto_files} ${client_enums_proto_files}
+
+
+# 4. 3の生成物をもとにサーバ関連のファイルを生成
+#server_common_proto_files=$(find ${server_proto_dir}/common -type f -name '*.proto')
+server_api_proto_files=$(find ${server_proto_dir}/api -type f -name '*.proto')
+server_mysql_proto_files=$(find ${server_proto_dir}/mysql -type f -name '*.proto')
+call_protoc \
+  --proto_path=${validate_proto_file_dir} \
+  --proto_path=${proto_file_dir} \
+	--all_out=gen_api,gen_mysql,paths=source_relative:. \
+  ${server_api_proto_files} ${server_mysql_proto_files} ${server_enums_proto_files}

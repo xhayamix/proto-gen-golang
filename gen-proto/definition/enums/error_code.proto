@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+package definition.enums;
+option go_package = "github.com/QualiArts/campus-server/pkg/domain/proto/definition/enums";
+
+import "definition/options/enums.proto";
+
+message ErrorCode {
+  option (definition.options.enums.define) = {
+    accessorType: ServerAndClient,
+    elements: [
+      // 1xxx: 基本的なエラー。grpcのステータスコード由来の名称
+      { name: "InvalidArgument", value: 1001, comment: "パラメータの不正" },
+      { name: "Internal", value: 1002, comment: "サーバー内部エラー" },
+      { name: "Unauthenticated", value: 1003, comment: "認証エラー" },
+      { name: "PermissionDenied", value: 1004, comment: "アクセス権限なし" },
+      { name: "NotFound", value: 1005, comment: "リソースが見つからなかった" },
+      // 2xxx: エラーによって特殊な動きをする場合のエラー,
+      {
+        name: "UserNotFound",
+        value: 2001,
+        comment: "ユーザーが見つからなかった"
+      },
+      {
+        name: "UserDeleted",
+        value: 2002,
+        comment: "ユーザーは削除済み"
+      },
+      { name: "InMaintenance", value: 2003, comment: "メンテナンス中" },
+      { name: "AccountBan", value: 2004, comment: "アカウント停止中" },
+      {
+        name: "NgWordContains",
+        value: 2005,
+        comment: "NGワードが含まれている"
+      },
+      { name: "ShopInvalidDay", value: 2006, comment: "無効な日付" }
+    ]
+  };
+}

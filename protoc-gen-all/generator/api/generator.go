@@ -2,6 +2,7 @@ package api
 
 import (
 	_ "embed"
+	"github.com/xhayamix/proto-gen-golang/protoc-gen-all/generator/api/output/gen-proto/server/api"
 	"sort"
 	"strings"
 
@@ -10,20 +11,13 @@ import (
 	"github.com/xhayamix/proto-gen-golang/protoc-gen-all/core"
 	"github.com/xhayamix/proto-gen-golang/protoc-gen-all/generator/api/input"
 	"github.com/xhayamix/proto-gen-golang/protoc-gen-all/generator/api/output"
-	"github.com/xhayamix/proto-gen-golang/protoc-gen-all/generator/api/output/gen-proto/server/api/game"
-	"github.com/xhayamix/proto-gen-golang/protoc-gen-all/generator/api/output/pkg/cmd/admin/handler"
-	adminregistry "github.com/xhayamix/proto-gen-golang/protoc-gen-all/generator/api/output/pkg/cmd/admin/registry"
-	interactorgameapi "github.com/xhayamix/proto-gen-golang/protoc-gen-all/generator/api/output/pkg/cmd/admin/usecase/interactor/gameapi"
-	adminiamrole "github.com/xhayamix/proto-gen-golang/protoc-gen-all/generator/api/output/pkg/cmd/admin/usecase/interactor/iamrole"
+	interactorapi "github.com/xhayamix/proto-gen-golang/protoc-gen-all/generator/api/output/pkg/cmd/admin/usecase/interactor/api"
 	"github.com/xhayamix/proto-gen-golang/protoc-gen-all/generator/api/output/pkg/cmd/api/middleware/check"
 	"github.com/xhayamix/proto-gen-golang/protoc-gen-all/generator/api/output/pkg/cmd/api/middleware/responsecache"
 	apiregistry "github.com/xhayamix/proto-gen-golang/protoc-gen-all/generator/api/output/pkg/cmd/api/registry"
-	"github.com/xhayamix/proto-gen-golang/protoc-gen-all/generator/api/output/pkg/cmd/gateway"
-	loadtestregistry "github.com/xhayamix/proto-gen-golang/protoc-gen-all/generator/api/output/pkg/cmd/loadtest/registry"
-	portgameapi "github.com/xhayamix/proto-gen-golang/protoc-gen-all/generator/api/output/pkg/domain/port/gameapi"
-	"github.com/xhayamix/proto-gen-golang/protoc-gen-all/generator/api/output/pkg/domain/proto/client/api"
+	portapi "github.com/xhayamix/proto-gen-golang/protoc-gen-all/generator/api/output/pkg/domain/port/api"
+	clientapi "github.com/xhayamix/proto-gen-golang/protoc-gen-all/generator/api/output/pkg/domain/proto/client/api"
 	"github.com/xhayamix/proto-gen-golang/protoc-gen-all/generator/api/output/pkg/infra/genserverapi"
-	"github.com/xhayamix/proto-gen-golang/protoc-gen-all/generator/api/output/web/src/apps/admin/requests"
 	"github.com/xhayamix/proto-gen-golang/protoc-gen-all/perrors"
 )
 
@@ -39,38 +33,25 @@ func NewGenerator(plugin *protogen.Plugin) core.Generator {
 	}
 }
 
-var eachGameCreators = []output.EachTemplateCreator{
-	&game.Creator{},
+var eachCreators = []output.EachTemplateCreator{
 	&api.Creator{},
+	&clientapi.Creator{},
 }
 
-var eachAdminCreators = []output.EachTemplateCreator{
-	handler.New(),
-	requests.New(),
-}
-
-var allGameCreators = []output.TemplateCreator{
-	&interactorgameapi.Creator{},
-	&portgameapi.Creator{},
+var allCreators = []output.TemplateCreator{
+	&interactorapi.Creator{},
+	&portapi.Creator{},
 	&responsecache.Creator{},
 	apiregistry.New(),
-	gateway.New(),
-	loadtestregistry.New(),
 }
 
-var allAdminCreators = []output.TemplateCreator{
-	adminregistry.New(),
-	adminiamrole.New(),
-}
-
-var allGameTemplatesCreators = []output.TemplatesCreator{
+var allTemplatesCreators = []output.TemplatesCreator{
 	&check.Creator{},
 	&genserverapi.Creator{},
 }
 
 func (g *generator) Build() ([]core.GenFile, error) {
-	gameFiles := make([]*input.File, 0)
-	adminFiles := make([]*input.File, 0)
+	files := make([]*input.File, 0)
 
 	for _, f := range g.plugin.Files {
 		if !f.Generate {
@@ -88,25 +69,18 @@ func (g *generator) Build() ([]core.GenFile, error) {
 			continue
 		}
 
-		if strings.HasPrefix(f.Proto.GetPackage(), "server.api.game") {
-			gameFiles = append(gameFiles, file)
-		} else if strings.HasPrefix(f.Proto.GetPackage(), "server.api.admin") {
-			adminFiles = append(adminFiles, file)
-		}
+		files = append(files, file)
 	}
 
 	// 入力ファイルの順番に左右されないようソートする
-	sort.SliceStable(gameFiles, func(i, j int) bool {
-		return gameFiles[i].SnakeName < gameFiles[j].SnakeName
-	})
-	sort.SliceStable(adminFiles, func(i, j int) bool {
-		return adminFiles[i].SnakeName < adminFiles[j].SnakeName
+	sort.SliceStable(files, func(i, j int) bool {
+		return files[i].SnakeName < files[j].SnakeName
 	})
 
 	genFiles := make([]core.GenFile, 0)
 
-	for _, creator := range eachGameCreators {
-		for _, file := range gameFiles {
+	for _, creator := range eachCreators {
+		for _, file := range files {
 			info, err := creator.Create(file)
 			if err != nil {
 				return nil, perrors.Stack(err)
@@ -119,22 +93,8 @@ func (g *generator) Build() ([]core.GenFile, error) {
 		}
 	}
 
-	for _, creator := range eachAdminCreators {
-		for _, file := range adminFiles {
-			info, err := creator.Create(file)
-			if err != nil {
-				return nil, perrors.Stack(err)
-			}
-			if info == nil {
-				continue
-			}
-
-			genFiles = append(genFiles, core.NewGenFile(info.FilePath, info.Data))
-		}
-	}
-
-	for _, creator := range allGameCreators {
-		info, err := creator.Create(gameFiles)
+	for _, creator := range allCreators {
+		info, err := creator.Create(files)
 		if err != nil {
 			return nil, perrors.Stack(err)
 		}
@@ -144,19 +104,8 @@ func (g *generator) Build() ([]core.GenFile, error) {
 		genFiles = append(genFiles, core.NewGenFile(info.FilePath, info.Data))
 	}
 
-	for _, creator := range allAdminCreators {
-		info, err := creator.Create(adminFiles)
-		if err != nil {
-			return nil, perrors.Stack(err)
-		}
-		if info == nil {
-			continue
-		}
-		genFiles = append(genFiles, core.NewGenFile(info.FilePath, info.Data))
-	}
-
-	for _, creator := range allGameTemplatesCreators {
-		infos, err := creator.Create(gameFiles)
+	for _, creator := range allTemplatesCreators {
+		infos, err := creator.Create(files)
 		if err != nil {
 			return nil, perrors.Stack(err)
 		}
