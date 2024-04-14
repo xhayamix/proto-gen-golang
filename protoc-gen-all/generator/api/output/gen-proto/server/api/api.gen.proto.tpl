@@ -15,10 +15,11 @@ service {{ $serviceName }} {
 {{- range .Service.Methods }}
   // {{ .Comment }}
   rpc {{ .PascalName }}({{ .InputType }}) returns ({{ .OutputType }}) {
-    option (google.api.http) = {
-      post: "/{{ $serviceName }}/{{ .PascalName }}"
-      body: "*"
-    };
+    // grpc-gateway使う場合は追加
+    // option (google.api.http) = {
+    //   post: "/{{ $serviceName }}/{{ .PascalName }}"
+    //   body: "*"
+    // };
     {{- range .Options }}
     option ({{ .Key }}) = {{ .Value }};
     {{- end }}

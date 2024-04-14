@@ -1,7 +1,7 @@
 syntax = "proto3";
 
 package definition.enums;
-option go_package = "github.com/QualiArts/campus-server/pkg/domain/proto/definition/enums";
+option go_package = "github.com/xhayamix/proto-gen-golang/pkg/domain/proto/definition/enums";
 
 import "definition/options/enums.proto";
 

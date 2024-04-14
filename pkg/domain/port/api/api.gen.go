@@ -20,7 +20,7 @@ var (
 
 type API interface {
 	// UserServiceGetProfile GetProfile
-	UserServiceGetProfile(ctx context.Context, req *api.UserServiceGetProfileRequest) (*api.UserServiceGetProfileResponse, error)
+	UserServiceGetProfile(ctx context.Context, req *api.GetProfileRequest) (*api.GetProfileResponse, error)
 	// Close クローズ処理
 	Close() error
 }

@@ -9,7 +9,7 @@ import (
 
 	"github.com/xhayamix/proto-gen-golang/pkg/cerrors"
 	"github.com/xhayamix/proto-gen-golang/pkg/domain/port/api"
-	"github.com/xhayamix/proto-gen-golang/pkg/domain/proto/client/api"
+	clientapi "github.com/xhayamix/proto-gen-golang/pkg/domain/proto/client/api"
 )
 
 func (i *interactor) list(ctx context.Context) []api.Method {
@@ -23,7 +23,7 @@ func (i *interactor) request(ctx context.Context, method api.Method, param strin
 	var err error
 	switch method {
 	case api.UserServiceGetProfile:
-		req := &api.UserServiceGetProfileRequest{}
+		req := &clientapi.GetProfileRequest{}
 		if err := json.Unmarshal([]byte(param), req); err != nil {
 			return "", cerrors.Wrap(err, cerrors.Internal)
 		}

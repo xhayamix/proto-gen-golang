@@ -25,7 +25,7 @@ type API interface {
 {{ range $service := . -}}
 {{ range $method := $service.Methods -}}
 	// {{ $service.PascalName }}{{ $method.PascalName }} {{ $method.Description }}
-	{{ $service.PascalName }}{{ $method.PascalName }}(ctx context.Context {{ if not $method.IsRequestEmpty }}, req *api.{{ $service.PascalName }}{{ $method.PascalName }}Request {{ end }} ) (*api.{{ $service.PascalName }}{{ $method.PascalName }}Response, error)
+	{{ $service.PascalName }}{{ $method.PascalName }}(ctx context.Context {{ if not $method.IsRequestEmpty }}, req *api.{{ $method.PascalName }}Request {{ end }} ) (*api.{{ $method.PascalName }}Response, error)
 {{ end -}}
 {{ end -}}
 	// Close クローズ処理

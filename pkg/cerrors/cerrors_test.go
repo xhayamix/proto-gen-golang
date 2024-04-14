@@ -17,12 +17,12 @@ func TestWrap(t *testing.T) {
 	fmt.Printf("%+v\n%v\n", err, err.Error())
 	// -- 出力イメージ --
 	// 	wrapf:
-	// 		github.com/QualiArts/campus-server/pkg/cerrors.TestWrap
+	// 		github.com/xhayamix/proto-gen-golang/pkg/cerrors.TestWrap
 	// 			/campus-server/pkg/cerrors/cerrors_test.go:14
-	// 	  - github.com/QualiArts/campus-server/pkg/cerrors.TestWrap
+	// 	  - github.com/xhayamix/proto-gen-golang/pkg/cerrors.TestWrap
 	// 			/campus-server/pkg/cerrors/cerrors_test.go:13
 	// 	  - wrapf:
-	// 		github.com/QualiArts/campus-server/pkg/cerrors.TestWrap
+	// 		github.com/xhayamix/proto-gen-golang/pkg/cerrors.TestWrap
 	// 			/campus-server/pkg/cerrors/cerrors_test.go:12
 	// 	  - new error
 	// 	error: code = Internal, message = wrapf

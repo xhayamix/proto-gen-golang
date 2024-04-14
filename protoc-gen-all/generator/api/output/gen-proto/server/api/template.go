@@ -169,7 +169,8 @@ func (c *Creator) Create(file *input.File) (*output.TemplateInfo, error) {
 	emptyResponses := make([]string, 0)
 
 	if file.Service != nil {
-		importPathSet.Add("google/api/annotations.proto")
+		// grpc-gateway使う場合は追加
+		// importPathSet.Add("google/api/annotations.proto")
 
 		inputService := file.Service
 		s := &Service{
@@ -239,9 +240,12 @@ func (c *Creator) Create(file *input.File) (*output.TemplateInfo, error) {
 			HasCommonResponse: true,
 		})
 	}
-	if len(emptyResponses) > 0 || responseMessageNameSetNeedCommonResponse.Size() > 0 {
-		importPathSet.Add("client/api/common/response_gen.proto")
-	}
+
+	/*
+		if len(emptyResponses) > 0 || responseMessageNameSetNeedCommonResponse.Size() > 0 {
+			importPathSet.Add("client/api/common/response_gen.proto")
+		}
+	*/
 
 	paths := importPathSet.List()
 	sort.Strings(paths)

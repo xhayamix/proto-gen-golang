@@ -7,19 +7,18 @@ package client.api;
 option go_package = "github.com/xhayamix/proto-gen-golang/pkg/domain/proto/client/api";
 option csharp_namespace = "Gen.Common.Proto.Client.Api";
 
-import "client/api/common/response_gen.proto";
 import "client/options/check_option.proto";
-import "google/api/annotations.proto";
 import "validate/validate.proto";
 
 // UserService
 service UserService {
   // GetProfile
   rpc GetProfile(GetProfileRequest) returns (GetProfileResponse) {
-    option (google.api.http) = {
-      post: "/UserService/GetProfile"
-      body: "*"
-    };
+    // grpc-gateway使う場合は追加
+    // option (google.api.http) = {
+    //   post: "/UserService/GetProfile"
+    //   body: "*"
+    // };
     option (options.check_option.checkOption) = {enableResponseCache:true};
   }
 }
@@ -51,7 +50,7 @@ message GetProfileRequest {
 message GetProfileResponse {
   // profile
   Profile profile = 1;
-  // 共通レスポンス
-  api.common.Response commonResponse = 9999;
+  // 共通レスポンス 使う場合は commonの生成を追加する必要あり
+  // api.common.Response commonResponse = 9999;
 }
 
