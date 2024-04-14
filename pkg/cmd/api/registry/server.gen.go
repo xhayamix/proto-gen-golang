@@ -5,9 +5,16 @@ package registry
 
 import (
 	"google.golang.org/grpc"
+
+	pb "github.com/xhayamix/proto-gen-golang/pkg/domain/proto/client/api"
 )
 
-func registerServer(s *grpc.Server) func() {
-	return func() {
+func registerServer(s *grpc.Server) func(
+	userServer pb.UserServer,
+) {
+	return func(
+		userServer pb.UserServer,
+	) {
+		pb.RegisterUserServer(s, userServer)
 	}
 }

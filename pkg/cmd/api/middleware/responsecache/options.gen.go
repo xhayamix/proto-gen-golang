@@ -3,4 +3,10 @@
 
 package responsecache
 
-var enableResponseCacheMethodMap = map[string]interface{}{}
+import (
+	"github.com/xhayamix/proto-gen-golang/pkg/domain/proto/client/api"
+)
+
+var enableResponseCacheMethodMap = map[string]interface{}{
+	"/client.api.UserService/GetProfile": (*api.GetProfileResponse)(nil),
+}

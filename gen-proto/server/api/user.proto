@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package server.api;
+option go_package = "github.com/xhayamix/proto-gen-golang/pkg/domain/proto/server/api";
+
+import "google/protobuf/empty.proto";
+import "server/enums/enums_gen.proto";
+import "server/options/api/api.proto";
+import "validate/validate.proto";
+
+service UserService {
+  rpc GetProfile(GetProfileRequest) returns (GetProfileResponse) {}
+}
+
+message Profile {
+  string userId = 1; // ユーザーデータを一意に定めるuuid
+  string account_id = 2; // 画面に表示するユーザーが設定できるID
+  string name = 3;
+  string iconImageURL = 4;
+  string bio = 5;
+}
+
+message GetProfileRequest {
+  string userId = 1 [(validate.rules).string.min_len = 1];
+}
+
+message GetProfileResponse { Profile profile = 1; }
