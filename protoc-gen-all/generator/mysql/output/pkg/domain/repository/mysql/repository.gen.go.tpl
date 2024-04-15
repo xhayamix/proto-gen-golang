@@ -20,6 +20,7 @@ type {{ $name }}Repository interface {
 	SelectAllByTx(ctx context.Context, tx database.ROTx) (mysql.{{ .GoName }}Slice, error)
 	SelectByPK(ctx context.Context{{ range .PKColumns }}, {{ .GoName }}_ {{ .Type }}{{ end }}) (*mysql.{{ .GoName }}, error)
 	SelectByTx(ctx context.Context, tx database.ROTx{{ range .PKColumns }}, {{ .GoName }}_ {{ .Type }}{{ end }}) (*mysql.{{ .GoName }}, error)
+	SelectByPKs(ctx context.Context, pks mysql.{{ .GoName }}PKs) (mysql.{{ .GoName }}Slice, error)
 	{{ range $i, $_ := slice .PKColumns 0 (sub (len .PKColumns) 1) -}}
 		{{ $cols := slice $pkColumns 0 (add1 $i) -}}
 		SelectBy{{ range $j, $col := $cols }}{{ if $j }}And{{ end }}{{ $col.GoName }}{{ end -}}

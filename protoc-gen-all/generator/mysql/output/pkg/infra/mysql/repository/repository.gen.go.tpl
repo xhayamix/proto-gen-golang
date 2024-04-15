@@ -85,6 +85,20 @@ func (r *{{ .CamelName }}Repository) SelectAllByTx(ctx context.Context, _tx data
 	return slice, nil
 }
 
+func (r *{{ .CamelName }}Repository) SelectByPKs(ctx context.Context, pks mysqlentity.{{ .GoName }}PKs) (mysqlentity.{{ .GoName }}Slice, error) {
+    var entities mysqlentity.{{ .GoName }}Slice
+    for _, pk := range pks {
+        entity, err := r.SelectByPK(ctx{{ range $pk := .PKColumns }}, pk.{{ .GoName }}{{ end }})
+        if err != nil {
+            return nil, cerrors.Wrap(err, cerrors.Internal)
+        }
+        if entity != nil {
+            entities = append(entities, entity)
+        }
+    }
+    return entities, nil
+}
+
 func (r *{{ .CamelName }}Repository) SelectByPK(ctx context.Context{{ range $pk := .PKColumns }}, {{ .GoName }}_ {{ .Type }}{{ end }}) (*mysqlentity.{{ .GoName }}, error) {
 	rows, err := r.db.QueryContext(ctx, "SELECT * FROM `{{ $tableName }}` WHERE
 	  {{- range $i, $pk := .PKColumns -}}
