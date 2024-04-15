@@ -57,6 +57,29 @@ func (r *{{ .CamelName }}Repository) SelectAll(ctx context.Context) (mysqlentity
 	return slice, nil
 }
 
+func (r *{{ .CamelName }}Repository) SelectAllOffset(ctx context.Context, offset, limit int) (mysqlentity.{{ .GoName }}Slice, error) {
+    query := "SELECT * FROM `{{ $tableName }}` ORDER BY `created_at` ASC LIMIT ? OFFSET ?"
+    rows, err := r.db.QueryContext(ctx, query, limit, offset)
+    if err != nil {
+        return nil, cerrors.Wrap(err, cerrors.Internal)
+    }
+    defer rows.Close()
+    cols, err := rows.Columns()
+    if err != nil {
+        return nil, cerrors.Wrap(err, cerrors.Internal)
+    }
+    slice := make(mysqlentity.{{ .GoName }}Slice, 0)
+    for rows.Next() {
+        entity := &mysqlentity.{{ .GoName }}{}
+        ptrs := entity.PtrFromMapping(cols)
+        if err := rows.Scan(ptrs...); err != nil {
+            return nil, cerrors.Wrap(err, cerrors.Internal)
+        }
+        slice = append(slice, entity)
+    }
+    return slice, nil
+}
+
 func (r *{{ .CamelName }}Repository) SelectAllByTx(ctx context.Context, _tx database.ROTx) (mysqlentity.{{ .GoName }}Slice, error) {
 	tx, err := mysql.ExtractTx(_tx)
 	if err != nil {

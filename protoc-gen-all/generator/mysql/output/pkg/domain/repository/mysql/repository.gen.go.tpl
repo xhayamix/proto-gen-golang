@@ -17,6 +17,7 @@ import (
 
 type {{ $name }}Repository interface {
 	SelectAll(ctx context.Context) (mysql.{{ .GoName }}Slice, error)
+	SelectAllOffset(ctx context.Context, offset, limit int) (mysql.{{ .GoName }}Slice, error)
 	SelectAllByTx(ctx context.Context, tx database.ROTx) (mysql.{{ .GoName }}Slice, error)
 	SelectByPK(ctx context.Context{{ range .PKColumns }}, {{ .GoName }}_ {{ .Type }}{{ end }}) (*mysql.{{ .GoName }}, error)
 	SelectByTx(ctx context.Context, tx database.ROTx{{ range .PKColumns }}, {{ .GoName }}_ {{ .Type }}{{ end }}) (*mysql.{{ .GoName }}, error)
