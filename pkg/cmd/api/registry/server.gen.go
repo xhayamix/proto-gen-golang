@@ -10,7 +10,7 @@ import (
 )
 
 func registerServer(s *grpc.Server) func(
-	userServer pb.UserServer,
+	userServer pb.UserServiceServer,
 ) {
 	return func(
 		userServer pb.UserServer,

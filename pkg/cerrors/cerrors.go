@@ -130,7 +130,7 @@ var (
 	}
 	// ShopInvalidBirthday 無効な日付
 	ShopInvalidBirthday = ErrorPattern{
-		ErrorCode:      enum.ErrorCode_ShopInvalidBirthday,
+		ErrorCode:      enum.ErrorCode_ShopInvalidDay,
 		ActionType:     ContinueDialog,
 		SkipLogging:    true,
 		HTTPStatusCode: http.StatusBadRequest,

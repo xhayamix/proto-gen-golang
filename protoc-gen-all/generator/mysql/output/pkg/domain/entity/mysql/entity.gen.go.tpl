@@ -293,6 +293,8 @@ type {{ .GoName }}PK struct {
 	{{ end -}}
 }
 
+type {{ .GoName }}PKs []*{{ .GoName }}PK
+
 func (e *{{ .GoName }}PK) Generate() []interface{} {
 	return []interface{}{
 	{{- range .PKColumns }}

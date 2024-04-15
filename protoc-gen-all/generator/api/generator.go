@@ -16,7 +16,6 @@ import (
 	"github.com/xhayamix/proto-gen-golang/protoc-gen-all/generator/api/output/pkg/cmd/api/middleware/responsecache"
 	apiregistry "github.com/xhayamix/proto-gen-golang/protoc-gen-all/generator/api/output/pkg/cmd/api/registry"
 	portapi "github.com/xhayamix/proto-gen-golang/protoc-gen-all/generator/api/output/pkg/domain/port/api"
-	clientapi "github.com/xhayamix/proto-gen-golang/protoc-gen-all/generator/api/output/pkg/domain/proto/client/api"
 	"github.com/xhayamix/proto-gen-golang/protoc-gen-all/generator/api/output/pkg/infra/genserverapi"
 	"github.com/xhayamix/proto-gen-golang/protoc-gen-all/perrors"
 )
@@ -35,7 +34,6 @@ func NewGenerator(plugin *protogen.Plugin) core.Generator {
 
 var eachCreators = []output.EachTemplateCreator{
 	&api.Creator{},
-	&clientapi.Creator{},
 }
 
 var allCreators = []output.TemplateCreator{
