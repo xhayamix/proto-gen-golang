@@ -27,7 +27,7 @@ type Config struct {
 func New(c *Config) (*sql.DB, error) {
 	var err error
 	dataSourceName := fmt.Sprintf("%s:%s@tcp(%s)/%s?parseTime=true&loc=Local", c.User, c.Password, c.Addr, c.DB)
-	db, err := sql.Open("mysql", dataSourceName)
+	db, err := sql.Open("transaction", dataSourceName)
 	if err != nil {
 		return nil, cerrors.Wrapf(err, cerrors.Internal, "MySQLに接続できませんでした。 dataSourceName = %s", dataSourceName)
 	}

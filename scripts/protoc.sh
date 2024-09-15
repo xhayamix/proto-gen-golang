@@ -41,12 +41,12 @@ call_protoc \
 # 4. 3の生成物をもとにサーバ関連のファイルを生成
 #server_common_proto_files=$(find ${server_proto_dir}/common -type f -name '*.proto')
 server_api_proto_files=$(find ${server_proto_dir}/api -type f -name '*.proto')
-server_mysql_proto_files=$(find ${server_proto_dir}/mysql -type f -name '*.proto')
+server_transaction_proto_files=$(find ${server_proto_dir}/transaction -type f -name '*.proto')
 call_protoc \
   --proto_path=${validate_proto_file_dir} \
   --proto_path=${proto_file_dir} \
-	--all_out=gen_api,gen_mysql,paths=source_relative:. \
-  ${server_api_proto_files} ${server_mysql_proto_files} ${server_enums_proto_files}
+	--all_out=gen_api,gen_transaction,paths=source_relative:. \
+  ${server_api_proto_files} ${server_transaction_proto_files} ${server_enums_proto_files}
 
 
 # 5. 4の生成物をもとにprotobuf、grpc、validatorの実装を生成

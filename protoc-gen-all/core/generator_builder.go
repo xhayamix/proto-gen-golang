@@ -94,7 +94,7 @@ func (g *generatorBuilder) Generate(generatedFilenamePrefixList []string) error 
 				"pkg/domain/proto/server/options/log/log.pb.go",
 				"pkg/domain/proto/server/options/master/master.pb.go",
 				"pkg/domain/proto/server/options/ranking/ranking.pb.go",
-				"pkg/domain/proto/server/options/mysql/mysql.pb.go",
+				"pkg/domain/proto/server/options/transaction/transaction.pb.go",
 				"pkg/domain/proto/server/options/transaction/transaction.pb.go",
 				"pkg/domain/proto/server/options/zap/zap.pb.go",
 
