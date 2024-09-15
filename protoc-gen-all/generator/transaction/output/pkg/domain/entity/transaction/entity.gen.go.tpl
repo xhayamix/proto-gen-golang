@@ -1,7 +1,7 @@
 {{ template "autogen_comment" }}
 {{- $pkColumns := .PKColumns }}
 {{- $goName := .GoName }}
-package mysql
+package transaction
 
 import (
 	"errors"

@@ -95,6 +95,6 @@ func (c *Creator) Create(
 
 	return &output.TemplateInfo{
 		Data:     buf.Bytes(),
-		FilePath: core.JoinPath("pkg/infra/transaction/repository", data.SnakeName+".gen.go"),
+		FilePath: core.JoinPath("pkg/infra/mysql/repository", data.SnakeName+".gen.go"),
 	}, nil
 }

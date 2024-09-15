@@ -5,7 +5,7 @@
 {{ $pkColumns := .PKColumns -}}
 {{ $indexMethods := list -}}
 {{ $pkgName := .PkgName }}
-package mysql
+package transaction
 
 import (
 	"context"
@@ -16,16 +16,16 @@ import (
 )
 
 type {{ $name }}Repository interface {
-	SelectAll(ctx context.Context) (mysql.{{ .GoName }}Slice, error)
-	SelectAllOffset(ctx context.Context, offset, limit int) (mysql.{{ .GoName }}Slice, error)
-	SelectAllByTx(ctx context.Context, tx database.ROTx) (mysql.{{ .GoName }}Slice, error)
-	SelectByPK(ctx context.Context{{ range .PKColumns }}, {{ .GoName }}_ {{ .Type }}{{ end }}) (*mysql.{{ .GoName }}, error)
-	SelectByTx(ctx context.Context, tx database.ROTx{{ range .PKColumns }}, {{ .GoName }}_ {{ .Type }}{{ end }}) (*mysql.{{ .GoName }}, error)
-	SelectByPKs(ctx context.Context, pks mysql.{{ .GoName }}PKs) (mysql.{{ .GoName }}Slice, error)
+	SelectAll(ctx context.Context) (transaction.{{ .GoName }}Slice, error)
+	SelectAllOffset(ctx context.Context, offset, limit int) (transaction.{{ .GoName }}Slice, error)
+	SelectAllByTx(ctx context.Context, tx database.ROTx) (transaction.{{ .GoName }}Slice, error)
+	SelectByPK(ctx context.Context{{ range .PKColumns }}, {{ .GoName }}_ {{ .Type }}{{ end }}) (*transaction.{{ .GoName }}, error)
+	SelectByTx(ctx context.Context, tx database.ROTx{{ range .PKColumns }}, {{ .GoName }}_ {{ .Type }}{{ end }}) (*transaction.{{ .GoName }}, error)
+	SelectByPKs(ctx context.Context, pks transaction.{{ .GoName }}PKs) (transaction.{{ .GoName }}Slice, error)
 	{{ range $i, $_ := slice .PKColumns 0 (sub (len .PKColumns) 1) -}}
 		{{ $cols := slice $pkColumns 0 (add1 $i) -}}
 		SelectBy{{ range $j, $col := $cols }}{{ if $j }}And{{ end }}{{ $col.GoName }}{{ end -}}
-			(ctx context.Context{{ range $cols }}, {{ .GoName }} {{ .Type }}{{ end }}) (mysql.{{ $name }}Slice, error)
+			(ctx context.Context{{ range $cols }}, {{ .GoName }} {{ .Type }}{{ end }}) (transaction.{{ $name }}Slice, error)
 	{{ end -}}
 	{{ range .Indexes -}}
 		{{ $keys := .Keys -}}
@@ -37,17 +37,17 @@ type {{ $name }}Repository interface {
 			{{ if not (has $method $indexMethods) -}}
 				{{ $indexMethods = append $indexMethods $method -}}
 				SelectBy{{ $method -}}
-					(ctx context.Context{{ range $cols }}, {{ .GoName }} {{ .Type }}{{ end }}) (mysql.{{ $name }}Slice, error)
+					(ctx context.Context{{ range $cols }}, {{ .GoName }} {{ .Type }}{{ end }}) (transaction.{{ $name }}Slice, error)
 			{{ end -}}
 		{{ end -}}
 	{{ end -}}
 	{{ range slice .PKColumns -}}
 		SearchBy{{ .GoName }}(ctx context.Context, searchText string, limit int) ([]{{ .Type }}, error)
 	{{ end -}}
-	Insert(ctx context.Context, tx database.RWTx, entity *mysql.{{ .GoName }}) error
-	BulkInsert(ctx context.Context, tx database.RWTx, entities mysql.{{ .GoName }}Slice, replace bool) error
-	Update(ctx context.Context, tx database.RWTx, entity *mysql.{{ .GoName }}) error
-	Delete(ctx context.Context, tx database.RWTx, entity *mysql.{{ .GoName }}) error
-	BulkDelete(ctx context.Context, tx database.RWTx, entities mysql.{{ .GoName }}Slice) error
+	Insert(ctx context.Context, tx database.RWTx, entity *transaction.{{ .GoName }}) error
+	BulkInsert(ctx context.Context, tx database.RWTx, entities transaction.{{ .GoName }}Slice, replace bool) error
+	Update(ctx context.Context, tx database.RWTx, entity *transaction.{{ .GoName }}) error
+	Delete(ctx context.Context, tx database.RWTx, entity *transaction.{{ .GoName }}) error
+	BulkDelete(ctx context.Context, tx database.RWTx, entities transaction.{{ .GoName }}Slice) error
 	DeleteAll(ctx context.Context, tx database.RWTx) error
 }

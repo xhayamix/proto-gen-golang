@@ -4,27 +4,27 @@
 //go:generate mockgen -source=$GOFILE -destination=mock_$GOPACKAGE/mock_user.go
 //go:generate goimports -w --local "github.com/xhayamix/proto-gen-golang" mock_$GOPACKAGE/mock_user.go
 
-package mysql
+package transaction
 
 import (
 	"context"
 
 	"github.com/xhayamix/proto-gen-golang/pkg/domain/database"
-	mysql "github.com/xhayamix/proto-gen-golang/pkg/domain/entity/transaction"
+	"github.com/xhayamix/proto-gen-golang/pkg/domain/entity/transaction"
 )
 
 type UserRepository interface {
-	SelectAll(ctx context.Context) (mysql.UserSlice, error)
-	SelectAllOffset(ctx context.Context, offset, limit int) (mysql.UserSlice, error)
-	SelectAllByTx(ctx context.Context, tx database.ROTx) (mysql.UserSlice, error)
-	SelectByPK(ctx context.Context, ID_ string) (*mysql.User, error)
-	SelectByTx(ctx context.Context, tx database.ROTx, ID_ string) (*mysql.User, error)
-	SelectByPKs(ctx context.Context, pks mysql.UserPKs) (mysql.UserSlice, error)
+	SelectAll(ctx context.Context) (transaction.UserSlice, error)
+	SelectAllOffset(ctx context.Context, offset, limit int) (transaction.UserSlice, error)
+	SelectAllByTx(ctx context.Context, tx database.ROTx) (transaction.UserSlice, error)
+	SelectByPK(ctx context.Context, ID_ string) (*transaction.User, error)
+	SelectByTx(ctx context.Context, tx database.ROTx, ID_ string) (*transaction.User, error)
+	SelectByPKs(ctx context.Context, pks transaction.UserPKs) (transaction.UserSlice, error)
 	SearchByID(ctx context.Context, searchText string, limit int) ([]string, error)
-	Insert(ctx context.Context, tx database.RWTx, entity *mysql.User) error
-	BulkInsert(ctx context.Context, tx database.RWTx, entities mysql.UserSlice, replace bool) error
-	Update(ctx context.Context, tx database.RWTx, entity *mysql.User) error
-	Delete(ctx context.Context, tx database.RWTx, entity *mysql.User) error
-	BulkDelete(ctx context.Context, tx database.RWTx, entities mysql.UserSlice) error
+	Insert(ctx context.Context, tx database.RWTx, entity *transaction.User) error
+	BulkInsert(ctx context.Context, tx database.RWTx, entities transaction.UserSlice, replace bool) error
+	Update(ctx context.Context, tx database.RWTx, entity *transaction.User) error
+	Delete(ctx context.Context, tx database.RWTx, entity *transaction.User) error
+	BulkDelete(ctx context.Context, tx database.RWTx, entities transaction.UserSlice) error
 	DeleteAll(ctx context.Context, tx database.RWTx) error
 }

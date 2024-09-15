@@ -12,8 +12,8 @@ import (
 
 	"github.com/xhayamix/proto-gen-golang/pkg/cerrors"
 	"github.com/xhayamix/proto-gen-golang/pkg/domain/database"
-	mysqlentity "github.com/xhayamix/proto-gen-golang/pkg/domain/entity/mysql"
-	repo "github.com/xhayamix/proto-gen-golang/pkg/domain/repository/mysql"
+	"github.com/xhayamix/proto-gen-golang/pkg/domain/entity/transaction"
+	repo "github.com/xhayamix/proto-gen-golang/pkg/domain/repository/transaction"
 	"github.com/xhayamix/proto-gen-golang/pkg/infra/mysql"
 )
 
@@ -27,7 +27,7 @@ func NewUserRepository(db mysql.MysqlDB) repo.UserRepository {
 	}
 }
 
-func (r *userRepository) SelectAll(ctx context.Context) (mysqlentity.UserSlice, error) {
+func (r *userRepository) SelectAll(ctx context.Context) (transaction.UserSlice, error) {
 	rows, err := r.db.QueryContext(ctx, "SELECT * FROM `user`")
 	if err != nil {
 		return nil, cerrors.Wrap(err, cerrors.Internal)
@@ -39,9 +39,9 @@ func (r *userRepository) SelectAll(ctx context.Context) (mysqlentity.UserSlice, 
 		return nil, cerrors.Wrap(err, cerrors.Internal)
 	}
 
-	slice := make(mysqlentity.UserSlice, 0)
+	slice := make(transaction.UserSlice, 0)
 	for rows.Next() {
-		entity := &mysqlentity.User{}
+		entity := &transaction.User{}
 		ptrs := entity.PtrFromMapping(cols)
 		if err := rows.Scan(ptrs...); err != nil {
 			return nil, cerrors.Wrap(err, cerrors.Internal)
@@ -51,7 +51,7 @@ func (r *userRepository) SelectAll(ctx context.Context) (mysqlentity.UserSlice, 
 	return slice, nil
 }
 
-func (r *userRepository) SelectAllOffset(ctx context.Context, offset, limit int) (mysqlentity.UserSlice, error) {
+func (r *userRepository) SelectAllOffset(ctx context.Context, offset, limit int) (transaction.UserSlice, error) {
 	query := "SELECT * FROM `user` ORDER BY `created_at` ASC LIMIT ? OFFSET ?"
 	rows, err := r.db.QueryContext(ctx, query, limit, offset)
 	if err != nil {
@@ -62,9 +62,9 @@ func (r *userRepository) SelectAllOffset(ctx context.Context, offset, limit int)
 	if err != nil {
 		return nil, cerrors.Wrap(err, cerrors.Internal)
 	}
-	slice := make(mysqlentity.UserSlice, 0)
+	slice := make(transaction.UserSlice, 0)
 	for rows.Next() {
-		entity := &mysqlentity.User{}
+		entity := &transaction.User{}
 		ptrs := entity.PtrFromMapping(cols)
 		if err := rows.Scan(ptrs...); err != nil {
 			return nil, cerrors.Wrap(err, cerrors.Internal)
@@ -74,7 +74,7 @@ func (r *userRepository) SelectAllOffset(ctx context.Context, offset, limit int)
 	return slice, nil
 }
 
-func (r *userRepository) SelectAllByTx(ctx context.Context, _tx database.ROTx) (mysqlentity.UserSlice, error) {
+func (r *userRepository) SelectAllByTx(ctx context.Context, _tx database.ROTx) (transaction.UserSlice, error) {
 	tx, err := mysql.ExtractTx(_tx)
 	if err != nil {
 		return nil, cerrors.Stack(err)
@@ -90,9 +90,9 @@ func (r *userRepository) SelectAllByTx(ctx context.Context, _tx database.ROTx) (
 		return nil, cerrors.Wrap(err, cerrors.Internal)
 	}
 
-	slice := make(mysqlentity.UserSlice, 0)
+	slice := make(transaction.UserSlice, 0)
 	for rows.Next() {
-		entity := &mysqlentity.User{}
+		entity := &transaction.User{}
 		ptrs := entity.PtrFromMapping(cols)
 		if err := rows.Scan(ptrs...); err != nil {
 			return nil, cerrors.Wrap(err, cerrors.Internal)
@@ -102,8 +102,8 @@ func (r *userRepository) SelectAllByTx(ctx context.Context, _tx database.ROTx) (
 	return slice, nil
 }
 
-func (r *userRepository) SelectByPKs(ctx context.Context, pks mysqlentity.UserPKs) (mysqlentity.UserSlice, error) {
-	var entities mysqlentity.UserSlice
+func (r *userRepository) SelectByPKs(ctx context.Context, pks transaction.UserPKs) (transaction.UserSlice, error) {
+	var entities transaction.UserSlice
 	for _, pk := range pks {
 		entity, err := r.SelectByPK(ctx, pk.ID)
 		if err != nil {
@@ -116,7 +116,7 @@ func (r *userRepository) SelectByPKs(ctx context.Context, pks mysqlentity.UserPK
 	return entities, nil
 }
 
-func (r *userRepository) SelectByPK(ctx context.Context, ID_ string) (*mysqlentity.User, error) {
+func (r *userRepository) SelectByPK(ctx context.Context, ID_ string) (*transaction.User, error) {
 	rows, err := r.db.QueryContext(ctx, "SELECT * FROM `user` WHERE `id`=?", ID_)
 	if err != nil {
 		return nil, cerrors.Wrap(err, cerrors.Internal)
@@ -128,7 +128,7 @@ func (r *userRepository) SelectByPK(ctx context.Context, ID_ string) (*mysqlenti
 		return nil, cerrors.Wrap(err, cerrors.Internal)
 	}
 
-	entity := &mysqlentity.User{}
+	entity := &transaction.User{}
 	ptrs := entity.PtrFromMapping(cols)
 	foundOne := false
 	for rows.Next() {
@@ -143,7 +143,7 @@ func (r *userRepository) SelectByPK(ctx context.Context, ID_ string) (*mysqlenti
 	return entity, nil
 }
 
-func (r *userRepository) SelectByTx(ctx context.Context, _tx database.ROTx, ID_ string) (*mysqlentity.User, error) {
+func (r *userRepository) SelectByTx(ctx context.Context, _tx database.ROTx, ID_ string) (*transaction.User, error) {
 	tx, err := mysql.ExtractTx(_tx)
 	if err != nil {
 		return nil, cerrors.Stack(err)
@@ -159,7 +159,7 @@ func (r *userRepository) SelectByTx(ctx context.Context, _tx database.ROTx, ID_ 
 		return nil, cerrors.Wrap(err, cerrors.Internal)
 	}
 
-	entity := &mysqlentity.User{}
+	entity := &transaction.User{}
 	ptrs := entity.PtrFromMapping(cols)
 	foundOne := false
 	for rows.Next() {
@@ -192,13 +192,13 @@ func (r *userRepository) SearchByID(ctx context.Context, searchText string, limi
 	return slice, nil
 }
 
-func (r *userRepository) Insert(ctx context.Context, _tx database.RWTx, entity *mysqlentity.User) error {
+func (r *userRepository) Insert(ctx context.Context, _tx database.RWTx, entity *transaction.User) error {
 	tx, err := mysql.ExtractTx(_tx)
 	if err != nil {
 		return cerrors.Stack(err)
 	}
 	query := "INSERT INTO `user` (`id`,`user_id`,`email`,`password`,`name`,`profile`,`icon_img`,`header_img`,`created_at`,`updated_at`) VALUES (?,?,?,?,?,?,?,?,?,?)"
-	vals := entity.PtrFromMapping(mysqlentity.UserCols)
+	vals := entity.PtrFromMapping(transaction.UserCols)
 	_, err = tx.ExecContext(ctx, query, vals...)
 	if err != nil {
 		return cerrors.Wrap(err, cerrors.Internal)
@@ -206,13 +206,13 @@ func (r *userRepository) Insert(ctx context.Context, _tx database.RWTx, entity *
 	return nil
 }
 
-func (r *userRepository) BulkInsert(ctx context.Context, _tx database.RWTx, entities mysqlentity.UserSlice, replace bool) error {
+func (r *userRepository) BulkInsert(ctx context.Context, _tx database.RWTx, entities transaction.UserSlice, replace bool) error {
 	tx, err := mysql.ExtractTx(_tx)
 	if err != nil {
 		return cerrors.Stack(err)
 	}
 
-	columnNames := mysqlentity.UserCols
+	columnNames := transaction.UserCols
 	recordCount := len(entities)
 	columnCount := len(columnNames)
 
@@ -223,12 +223,12 @@ func (r *userRepository) BulkInsert(ctx context.Context, _tx database.RWTx, enti
 		paramPlaces = append(paramPlaces, "?")
 	}
 
-	recordsList := make([]mysqlentity.UserSlice, 0, int64(math.Ceil(float64(recordCount)/float64(mysql.PlaceholderLimit))))
+	recordsList := make([]transaction.UserSlice, 0, int64(math.Ceil(float64(recordCount)/float64(mysql.PlaceholderLimit))))
 	tempRecordsCap := recordCount
 	if recordCount > mysql.PlaceholderLimit {
 		tempRecordsCap = mysql.PlaceholderLimit
 	}
-	tempRecords := make(mysqlentity.UserSlice, 0, tempRecordsCap)
+	tempRecords := make(transaction.UserSlice, 0, tempRecordsCap)
 	placeholderCount := 0
 	// プリペアドステートメントの上限に合わせてクエリを分割する
 	for i, record := range entities {
@@ -237,7 +237,7 @@ func (r *userRepository) BulkInsert(ctx context.Context, _tx database.RWTx, enti
 		if placeholderCount > mysql.PlaceholderLimit { // 上限を超えた場合
 			placeholderCount = columnCount
 			recordsList = append(recordsList, tempRecords)
-			tempRecords = make(mysqlentity.UserSlice, 0, mysql.PlaceholderLimit) // 上限を超えないかも知れないが一応上限までCapを確保して初期化
+			tempRecords = make(transaction.UserSlice, 0, mysql.PlaceholderLimit) // 上限を超えないかも知れないが一応上限までCapを確保して初期化
 		}
 
 		tempRecords = append(tempRecords, record)
@@ -293,7 +293,7 @@ func (r *userRepository) BulkInsert(ctx context.Context, _tx database.RWTx, enti
 	return nil
 }
 
-func (r *userRepository) Update(ctx context.Context, _tx database.RWTx, entity *mysqlentity.User) error {
+func (r *userRepository) Update(ctx context.Context, _tx database.RWTx, entity *transaction.User) error {
 	tx, err := mysql.ExtractTx(_tx)
 	if err != nil {
 		return cerrors.Stack(err)
@@ -307,7 +307,7 @@ func (r *userRepository) Update(ctx context.Context, _tx database.RWTx, entity *
 	return nil
 }
 
-func (r *userRepository) Delete(ctx context.Context, _tx database.RWTx, entity *mysqlentity.User) error {
+func (r *userRepository) Delete(ctx context.Context, _tx database.RWTx, entity *transaction.User) error {
 	tx, err := mysql.ExtractTx(_tx)
 	if err != nil {
 		return cerrors.Stack(err)
@@ -321,7 +321,7 @@ func (r *userRepository) Delete(ctx context.Context, _tx database.RWTx, entity *
 	return nil
 }
 
-func (r *userRepository) BulkDelete(ctx context.Context, _tx database.RWTx, entities mysqlentity.UserSlice) error {
+func (r *userRepository) BulkDelete(ctx context.Context, _tx database.RWTx, entities transaction.UserSlice) error {
 	if len(entities) == 0 {
 		return nil
 	}
@@ -336,12 +336,12 @@ func (r *userRepository) BulkDelete(ctx context.Context, _tx database.RWTx, enti
 	recordCount := len(entities)
 	pkCount := len(pkNames)
 
-	recordsList := make([]mysqlentity.UserSlice, 0, int64(math.Ceil(float64(recordCount)/float64(mysql.PlaceholderLimit))))
+	recordsList := make([]transaction.UserSlice, 0, int64(math.Ceil(float64(recordCount)/float64(mysql.PlaceholderLimit))))
 	tempRecordsCap := recordCount
 	if recordCount > mysql.PlaceholderLimit {
 		tempRecordsCap = mysql.PlaceholderLimit
 	}
-	tempRecords := make(mysqlentity.UserSlice, 0, tempRecordsCap)
+	tempRecords := make(transaction.UserSlice, 0, tempRecordsCap)
 	placeholderCount := 0
 	// プリペアドステートメントの上限に合わせてクエリを分割する
 	for i, record := range entities {
@@ -350,7 +350,7 @@ func (r *userRepository) BulkDelete(ctx context.Context, _tx database.RWTx, enti
 		if placeholderCount > mysql.PlaceholderLimit { // 上限を超えた場合
 			placeholderCount = pkCount
 			recordsList = append(recordsList, tempRecords)
-			tempRecords = make(mysqlentity.UserSlice, 0, mysql.PlaceholderLimit) // 上限を超えないかも知れないが一応上限までCapを確保して初期化
+			tempRecords = make(transaction.UserSlice, 0, mysql.PlaceholderLimit) // 上限を超えないかも知れないが一応上限までCapを確保して初期化
 		}
 
 		tempRecords = append(tempRecords, record)
