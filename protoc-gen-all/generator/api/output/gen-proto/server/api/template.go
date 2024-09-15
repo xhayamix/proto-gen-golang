@@ -271,6 +271,6 @@ func (c *Creator) Create(file *input.File) (*output.TemplateInfo, error) {
 
 	return &output.TemplateInfo{
 		Data:     buf.Bytes(),
-		FilePath: core.JoinPath("gen-proto/client/api", pkgName, file.SnakeName+"_gen.proto"),
+		FilePath: core.JoinPath("proto/client/api", pkgName, file.SnakeName+"_gen.proto"),
 	}, nil
 }

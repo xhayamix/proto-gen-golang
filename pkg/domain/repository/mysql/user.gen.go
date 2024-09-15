@@ -15,9 +15,11 @@ import (
 
 type UserRepository interface {
 	SelectAll(ctx context.Context) (mysql.UserSlice, error)
+	SelectAllOffset(ctx context.Context, offset, limit int) (mysql.UserSlice, error)
 	SelectAllByTx(ctx context.Context, tx database.ROTx) (mysql.UserSlice, error)
 	SelectByPK(ctx context.Context, ID_ string) (*mysql.User, error)
 	SelectByTx(ctx context.Context, tx database.ROTx, ID_ string) (*mysql.User, error)
+	SelectByPKs(ctx context.Context, pks mysql.UserPKs) (mysql.UserSlice, error)
 	SearchByID(ctx context.Context, searchText string, limit int) ([]string, error)
 	Insert(ctx context.Context, tx database.RWTx, entity *mysql.User) error
 	BulkInsert(ctx context.Context, tx database.RWTx, entities mysql.UserSlice, replace bool) error

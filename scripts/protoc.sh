@@ -1,6 +1,6 @@
 #!/bin/sh
 
-proto_file_dir=./gen-proto
+proto_file_dir=./proto
 validate_proto_file_dir=${GOPATH}/pkg/mod/github.com/envoyproxy/protoc-gen-validate\@v1.0.4
 bq_schema_proto_file_dir=${GOPATH}/pkg/mod/github.com/!google!cloud!platform/protoc-gen-bq-schema\@v0.0.0-20230915083002-8edab4bb6c81
 def_proto_dir=${proto_file_dir}/definition

@@ -138,11 +138,6 @@ var (
 	}
 )
 
-var (
-	// PaymentChargeReceiptUsed 課金決済レシートが既に使用済みだった場合のエラー
-	PaymentChargeReceiptUsed = Newf(InvalidArgument, "charge receipt is already used")
-)
-
 // CampusError サーバ-クライアント間エラーハンドリング用エラー
 type CampusError struct {
 	// エラーパターン

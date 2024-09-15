@@ -95,6 +95,6 @@ func (c *Creator) Create(enum *input.Enum) (*output.TemplateInfo, error) {
 	}
 	return &output.TemplateInfo{
 		Data:     buf.Bytes(),
-		FilePath: core.JoinPath("gen-proto/server/master", fileName),
+		FilePath: core.JoinPath("proto/server/master", fileName),
 	}, nil
 }

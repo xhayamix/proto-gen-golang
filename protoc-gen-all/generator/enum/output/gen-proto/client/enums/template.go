@@ -61,6 +61,6 @@ func (c *Creator) Create(enums []*input.Enum) (*output.TemplateInfo, error) {
 
 	return &output.TemplateInfo{
 		Data:     buf.Bytes(),
-		FilePath: core.JoinPath("gen-proto/client/enums", "enums_gen.proto"),
+		FilePath: core.JoinPath("proto/client/enums", "enums_gen.proto"),
 	}, nil
 }

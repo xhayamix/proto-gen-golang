@@ -17,8 +17,8 @@ services:
 
   protoc:
     platform: linux/x86_64
-    container_name: protoc
-    image: protoc
+    container_name: protoc-gen-all
+    image: protoc-gen-all
     build:
       context: ../
       dockerfile: ./build/docker/protoc/Dockerfile

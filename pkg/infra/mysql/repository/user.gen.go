@@ -51,6 +51,29 @@ func (r *userRepository) SelectAll(ctx context.Context) (mysqlentity.UserSlice, 
 	return slice, nil
 }
 
+func (r *userRepository) SelectAllOffset(ctx context.Context, offset, limit int) (mysqlentity.UserSlice, error) {
+	query := "SELECT * FROM `user` ORDER BY `created_at` ASC LIMIT ? OFFSET ?"
+	rows, err := r.db.QueryContext(ctx, query, limit, offset)
+	if err != nil {
+		return nil, cerrors.Wrap(err, cerrors.Internal)
+	}
+	defer rows.Close()
+	cols, err := rows.Columns()
+	if err != nil {
+		return nil, cerrors.Wrap(err, cerrors.Internal)
+	}
+	slice := make(mysqlentity.UserSlice, 0)
+	for rows.Next() {
+		entity := &mysqlentity.User{}
+		ptrs := entity.PtrFromMapping(cols)
+		if err := rows.Scan(ptrs...); err != nil {
+			return nil, cerrors.Wrap(err, cerrors.Internal)
+		}
+		slice = append(slice, entity)
+	}
+	return slice, nil
+}
+
 func (r *userRepository) SelectAllByTx(ctx context.Context, _tx database.ROTx) (mysqlentity.UserSlice, error) {
 	tx, err := mysql.ExtractTx(_tx)
 	if err != nil {
@@ -77,6 +100,20 @@ func (r *userRepository) SelectAllByTx(ctx context.Context, _tx database.ROTx) (
 		slice = append(slice, entity)
 	}
 	return slice, nil
+}
+
+func (r *userRepository) SelectByPKs(ctx context.Context, pks mysqlentity.UserPKs) (mysqlentity.UserSlice, error) {
+	var entities mysqlentity.UserSlice
+	for _, pk := range pks {
+		entity, err := r.SelectByPK(ctx, pk.ID)
+		if err != nil {
+			return nil, cerrors.Wrap(err, cerrors.Internal)
+		}
+		if entity != nil {
+			entities = append(entities, entity)
+		}
+	}
+	return entities, nil
 }
 
 func (r *userRepository) SelectByPK(ctx context.Context, ID_ string) (*mysqlentity.User, error) {

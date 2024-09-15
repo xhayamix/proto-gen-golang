@@ -13,7 +13,7 @@ define docker-compose
 		$1
 endef
 
-## protobuf (usage: `make protobuf arg='protoc --proto_path=./gen-proto --go_out=module=github.com/xhayamix/proto-gen-golang:. ./gen-proto/server/options/api/api.proto'`)
+## protobuf (usage: `make protobuf arg='protoc --proto_path=./proto --go_out=module=github.com/xhayamix/proto-gen-golang:. ./proto/server/options/api/api.proto'`)
 .PHONY: protobuf
 protobuf:
 	$(call docker-compose, run --rm protobuf $(arg))

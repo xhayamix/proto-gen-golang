@@ -221,6 +221,8 @@ type UserPK struct {
 	ID string
 }
 
+type UserPKs []*UserPK
+
 func (e *UserPK) Generate() []interface{} {
 	return []interface{}{
 		e.ID,
