@@ -8,7 +8,7 @@ import "server/enums/enums_gen.proto";
 import "server/options/api/api.proto";
 import "validate/validate.proto";
 
-service UserService {
+service User {
   rpc GetProfile(GetProfileRequest) returns (GetProfileResponse) {}
 }
 

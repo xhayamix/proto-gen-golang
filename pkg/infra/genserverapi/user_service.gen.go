@@ -10,12 +10,12 @@ import (
 	"github.com/xhayamix/proto-gen-golang/pkg/domain/proto/client/api"
 )
 
-func (c *client) UserServiceGetProfile(ctx context.Context, req *api.UserServiceGetProfileRequest) (*api.UserServiceGetProfileResponse, error) {
+func (c *client) UserServiceGetProfile(ctx context.Context, req *api.GetProfileRequest) (*api.GetProfileResponse, error) {
 	conn, err := c.getConn()
 	if err != nil {
 		return nil, cerrors.Stack(err)
 	}
-	cli := api.NewUserServiceClient(conn)
+	cli := api.NewUserClient(conn)
 	result, err := cli.GetProfile(ctx, req)
 	if err != nil {
 		return nil, cerrors.Wrap(err, cerrors.Internal)

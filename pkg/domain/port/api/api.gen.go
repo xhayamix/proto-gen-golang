@@ -14,13 +14,13 @@ import (
 type Method string
 
 var (
-	// UserService
-	UserServiceGetProfile Method = "UserServiceGetProfile"
+	// User
+	UserGetProfile Method = "UserGetProfile"
 )
 
 type API interface {
-	// UserServiceGetProfile GetProfile
-	UserServiceGetProfile(ctx context.Context, req *api.GetProfileRequest) (*api.GetProfileResponse, error)
+	// UserGetProfile GetProfile
+	UserGetProfile(ctx context.Context, req *api.GetProfileRequest) (*api.GetProfileResponse, error)
 	// Close クローズ処理
 	Close() error
 }

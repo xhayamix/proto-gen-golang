@@ -8,5 +8,5 @@ import (
 )
 
 var enableResponseCacheMethodMap = map[string]interface{}{
-	"/client.api.UserService/GetProfile": (*api.GetProfileResponse)(nil),
+	"/client.api.User/GetProfile": (*api.GetProfileResponse)(nil),
 }

@@ -1,0 +1,19 @@
+// 変更したら下記で再生成
+// make protobuf arg='protoc --go_out=paths=source_relative:.
+// ./pkg/grpc/codec/protoenc/testdata/test.proto'
+syntax = "proto3";
+
+package test;
+option go_package = "github.com/QualiArts/campus-server/pkg/grpc/codec/protoenc/testdata";
+
+message Version1 {
+  string name1 = 1;
+  string name2 = 2;
+}
+
+message Version2 {
+  message internal { string name2 = 1; }
+  string name1 = 1;
+  internal name2 = 3;
+  bool zero = 4;
+}

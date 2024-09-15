@@ -14,7 +14,7 @@ import (
 
 func (i *interactor) list(ctx context.Context) []api.Method {
 	return []api.Method{
-		api.UserServiceGetProfile,
+		api.UserGetProfile,
 	}
 }
 
@@ -22,12 +22,12 @@ func (i *interactor) request(ctx context.Context, method api.Method, param strin
 	var result interface{}
 	var err error
 	switch method {
-	case api.UserServiceGetProfile:
+	case api.UserGetProfile:
 		req := &clientapi.GetProfileRequest{}
 		if err := json.Unmarshal([]byte(param), req); err != nil {
 			return "", cerrors.Wrap(err, cerrors.Internal)
 		}
-		result, err = i.api.UserServiceGetProfile(ctx, req)
+		result, err = i.api.UserGetProfile(ctx, req)
 		if err != nil {
 			return "", cerrors.Wrap(err, cerrors.Internal)
 		}

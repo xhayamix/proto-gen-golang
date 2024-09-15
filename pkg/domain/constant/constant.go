@@ -1,6 +1,7 @@
 package constant
 
 import (
+	"github.com/labstack/echo/v4"
 	"regexp"
 	"time"
 )
@@ -27,6 +28,95 @@ const (
 	DefaultResetWeek = time.Monday
 	// DefaultResetDay リセット日
 	DefaultResetDay = 1
+
+	/* headers */
+
+	// HeaderAcceptLanguage accept-language
+	HeaderAcceptLanguage = "Accept-Language"
+	// HeaderAuthorization authorization
+	HeaderAuthorization = "Authorization"
+	// HeaderValuePrefixBearer Bearer
+	HeaderValuePrefixBearer = "Bearer "
+
+	// HeaderCacheControl cache-control
+	HeaderCacheControl = "Cache-Control"
+	// HeaderContentType content-type
+	HeaderContentType = echo.HeaderContentType
+	// HeaderContentLength content-length
+	HeaderContentLength = echo.HeaderContentLength
+	// HeaderReferer Referer
+	HeaderReferer = "Referer"
+	// HeaderUserAgent user-agent
+	HeaderUserAgent = "User-Agent"
+	// HeaderXAppCache x-app-cache
+	HeaderXAppCache = "X-App-Cache"
+	// HeaderXAppRequestID x-app-request-id
+	HeaderXAppRequestID = "X-App-Request-Id"
+	// HeaderXAppRequestSignature x-app-request-signature
+	HeaderXAppRequestSignature = "X-App-Request-Signature"
+	// HeaderXAppRequestTimestamp x-app-request-timestamp
+	HeaderXAppRequestTimestamp = "X-App-Request-Timestamp"
+	// HeaderXAppVersion x-app-version
+	HeaderXAppVersion = "X-App-Version"
+	// HeaderXAuthToken x-auth-token
+	//nolint:gosec // 認証情報と誤検知しているので無視
+	HeaderXAuthToken = "X-Auth-Token"
+	// HeaderXCloudTraceContext x-cloud-trace-context
+	HeaderXCloudTraceContext = "X-Cloud-Trace-Context"
+	// HeaderXDebugTime x-debug-time
+	HeaderXDebugTime = "X-Debug-Time"
+	// HeaderXErrorAction x-error-action
+	HeaderXErrorAction = "X-Error-Action"
+	// HeaderXErrorCode x-error-code
+	HeaderXErrorCode = "X-Error-Code"
+	// HeaderXErrorMessageBin x-error-message-bin
+	HeaderXErrorMessageBin = "X-Error-Message-Bin"
+	// HeaderXForwardedFor x-forwarded-for
+	HeaderXForwardedFor = echo.HeaderXForwardedFor
+	// HeaderXForwardedProto x-forwarded-proto
+	HeaderXForwardedProto = echo.HeaderXForwardedProto
+	// HeaderXGoogAuthenticatedUserEmail x-goog-authenticated-user-email
+	HeaderXGoogAuthenticatedUserEmail = "X-Goog-Authenticated-User-Email"
+	// HeaderXGoogAuthenticatedUserID x-goog-authenticated-user-id
+	HeaderXGoogAuthenticatedUserID = "X-Goog-Authenticated-User-Id"
+	// HeaderXGoogIapJwtAssertion x-goog-iap-jwt-assertion
+	HeaderXGoogIapJwtAssertion = "X-Goog-Iap-Jwt-Assertion"
+	// HeaderXMasterVersion x-master-version
+	HeaderXMasterVersion = "X-Master-Version"
+	// HeaderXPlatform x-platform
+	HeaderXPlatform = "X-Platform"
+	// HeaderXServerTime x-server-time
+	HeaderXServerTime = "X-Server-Time"
+	// HeaderXAdID x-ad-id
+	HeaderXAdID = "X-Ad-Id"
+	// HeaderXDeviceName x-device-name
+	HeaderXDeviceName = "X-Device-Name"
+	// HeaderXOSVersion x-os-version
+	HeaderXOSVersion = "X-Os-Version"
+	// HeaderXIOSIsJailBreak x-i-isj
+	HeaderXIOSIsJailBreak = "X-I-Isj"
+	// HeaderXIOSIsGameGuardian x-i-isg
+	HeaderXIOSIsGameGuardian = "X-I-Isg"
+	// HeaderXIOSIsDebuggerAttached x-i-isda
+	HeaderXIOSIsDebuggerAttached = "X-I-Isda"
+	// HeaderXIOSInjectionList x-i-il
+	HeaderXIOSInjectionList = "X-I-Il"
+	// HeaderXIOSAppSignature x-i-s
+	HeaderXIOSAppSignature = "X-I-S"
+	// HeaderXAndroidIsRoot x-a-isr
+	HeaderXAndroidIsRoot = "X-A-Isr"
+	// HeaderXAndroidIsEmulator x-a-ise
+	HeaderXAndroidIsEmulator = "X-A-Ise"
+	// HeaderXAndroidIsDebuggerAttached x-a-isda
+	HeaderXAndroidIsDebuggerAttached = "X-A-Isda"
+	// HeaderXAndroidIsOverlayPermit x-a-isop
+	HeaderXAndroidIsOverlayPermit = "X-A-Isop"
+	// HeaderXAndroidAppSignature x-a-s
+	HeaderXAndroidAppSignature = "X-A-S"
+	// HeaderXPlatformUserID platform-user-id
+	HeaderXPlatformUserID = "X-Platform-User-Id"
+	// HeaderXProduceClearTimeValidationEnable produce-clear-time-validation-enable
+	HeaderXProduceClearTimeValidationEnable = "X-Produce-Clear-Time-Validation-Enable"
 
 	/* content types */
 

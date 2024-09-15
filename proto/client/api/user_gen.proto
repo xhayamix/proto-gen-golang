@@ -10,13 +10,13 @@ option csharp_namespace = "Gen.Common.Proto.Client.Api";
 import "client/options/check_option.proto";
 import "validate/validate.proto";
 
-// UserService
-service UserService {
+// User
+service User {
   // GetProfile
   rpc GetProfile(GetProfileRequest) returns (GetProfileResponse) {
     // grpc-gateway使う場合は追加
     // option (google.api.http) = {
-    //   post: "/UserService/GetProfile"
+    //   post: "/User/GetProfile"
     //   body: "*"
     // };
     option (options.check_option.checkOption) = {enableResponseCache:true};
