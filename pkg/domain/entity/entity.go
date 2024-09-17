@@ -1,5 +1,5 @@
 //go:generate mockgen -source=$GOFILE -destination=mock_$GOPACKAGE/mock_$GOFILE
-//go:generate goimports -w --local "github.com/QualiArts/campus-server" mock_$GOPACKAGE/mock_$GOFILE
+//go:generate goimports -w --local "github.com/xhayamix/proto-gen-golang" mock_$GOPACKAGE/mock_$GOFILE
 package entity
 
 type Record interface {

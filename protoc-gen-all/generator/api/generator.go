@@ -2,7 +2,7 @@ package api
 
 import (
 	_ "embed"
-	"github.com/xhayamix/proto-gen-golang/protoc-gen-all/generator/api/output/gen-proto/server/api"
+	"github.com/xhayamix/proto-gen-golang/protoc-gen-all/generator/api/output/proto/server/api"
 	"sort"
 	"strings"
 

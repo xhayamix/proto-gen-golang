@@ -4,7 +4,7 @@
 syntax = "proto3";
 
 package test;
-option go_package = "github.com/QualiArts/campus-server/pkg/grpc/codec/protoenc/testdata";
+option go_package = "github.com/xhayamix/proto-gen-golang/pkg/grpc/codec/protoenc/testdata";
 
 message Version1 {
   string name1 = 1;
