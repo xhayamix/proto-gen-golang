@@ -138,8 +138,8 @@ var (
 	}
 )
 
-// CampusError サーバ-クライアント間エラーハンドリング用エラー
-type CampusError struct {
+// HayamiError サーバ-クライアント間エラーハンドリング用エラー
+type HayamiError struct {
 	// エラーパターン
 	ErrorPattern ErrorPattern
 
@@ -153,23 +153,23 @@ type CampusError struct {
 
 // stackError stacktrace用エラー
 type stackError struct {
-	*CampusError
+	*HayamiError
 }
 
-// New CampusErrorを生成する
+// New HayamiErrorを生成する
 func New(errorPattern ErrorPattern) error {
 	return newError(nil, errorPattern, "")
 }
 
-// Newf CampusErrorを生成する
+// Newf HayamiErrorを生成する
 func Newf(errorPattern ErrorPattern, format string, a ...interface{}) error {
 	return newError(nil, errorPattern, fmt.Sprintf(format, a...))
 }
 
-// Wrap エラーをCampusエラーでラップする
+// Wrap エラーをHayamiエラーでラップする
 func Wrap(cause error, errorPattern ErrorPattern) error {
 	var message string
-	var cerr *CampusError
+	var cerr *HayamiError
 	if errors.As(cause, &cerr) {
 		message = cerr.Message()
 	} else {
@@ -178,13 +178,13 @@ func Wrap(cause error, errorPattern ErrorPattern) error {
 	return newError(cause, errorPattern, message)
 }
 
-// Wrapf エラーをCampusエラーでラップする
+// Wrapf エラーをHayamiエラーでラップする
 func Wrapf(cause error, errorPattern ErrorPattern, format string, a ...interface{}) error {
 	return newError(cause, errorPattern, fmt.Sprintf(format, a...))
 }
 
-func As(cause error) (*CampusError, bool) {
-	var cerr *CampusError
+func As(cause error) (*HayamiError, bool) {
+	var cerr *HayamiError
 	if errors.As(cause, &cerr) {
 		return cerr, true
 	}
@@ -192,7 +192,7 @@ func As(cause error) (*CampusError, bool) {
 }
 
 func newError(cause error, errorPattern ErrorPattern, errorMessage string) error {
-	return &CampusError{
+	return &HayamiError{
 		ErrorPattern: errorPattern,
 		errorMessage: errorMessage,
 		err:          cause,
@@ -206,13 +206,13 @@ func newError(cause error, errorPattern ErrorPattern, errorMessage string) error
 func Stack(err error) error {
 	pattern := Unknown
 	message := ""
-	var campusError *CampusError
-	if errors.As(err, &campusError) {
-		pattern = campusError.ErrorPattern
-		message = campusError.errorMessage
+	var hayamiError *HayamiError
+	if errors.As(err, &hayamiError) {
+		pattern = hayamiError.ErrorPattern
+		message = hayamiError.errorMessage
 	}
 	return &stackError{
-		CampusError: &CampusError{
+		HayamiError: &HayamiError{
 			ErrorPattern: pattern,
 			errorMessage: message,
 			err:          err,
@@ -222,28 +222,28 @@ func Stack(err error) error {
 }
 
 // Error エラーメッセージを取得する
-func (e *CampusError) Error() string {
+func (e *HayamiError) Error() string {
 	return fmt.Sprintf("error: code = %v, message = %s", e.ErrorPattern.ErrorCode, e.errorMessage)
 }
 
-func (e *CampusError) Unwrap() error {
+func (e *HayamiError) Unwrap() error {
 	if e == nil {
 		return nil
 	}
 	return e.err
 }
 
-func (e *CampusError) Format(s fmt.State, v rune) {
+func (e *HayamiError) Format(s fmt.State, v rune) {
 	xerrors.FormatError(e, s, v)
 }
 
-func (e *CampusError) FormatError(p xerrors.Printer) error {
+func (e *HayamiError) FormatError(p xerrors.Printer) error {
 	p.Print(e.Message())
 	e.frame.Format(p)
 	return e.Unwrap()
 }
 
-func (e *CampusError) Message() string {
+func (e *HayamiError) Message() string {
 	if e == nil {
 		return ""
 	}
