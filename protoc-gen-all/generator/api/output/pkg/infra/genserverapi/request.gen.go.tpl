@@ -12,7 +12,7 @@ import (
 
 {{- $service := . }}
 {{ range $method := $service.Methods }}
-func (c *client) {{ $service.PascalName }}{{ $method.PascalName }}(ctx context.Context {{ if not $method.IsRequestEmpty }}, req *api.{{ $service.PascalName }}{{ $method.PascalName }}Request {{ end }} ) (*api.{{ $service.PascalName }}{{ $method.PascalName }}Response, error) {
+func (c *client) {{ $service.PascalName }}{{ $method.PascalName }}(ctx context.Context {{ if not $method.IsRequestEmpty }}, req *api.{{ $method.PascalName }}Request {{ end }} ) (*api.{{ $method.PascalName }}Response, error) {
     conn, err := c.getConn()
 	if err != nil {
 		return nil, cerrors.Stack(err)
